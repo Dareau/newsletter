@@ -1,0 +1,36 @@
+[33mcommit c6f04fdab3d0b429263d9f1d4fbd9fcb405e6799[m
+Author: Dareau <nidareau@yahoo.fr>
+Date:   Sat Feb 6 19:46:24 2016 +0100
+
+    Correction bug JS edition
+
+[33mcommit 062c09647d2a05bdb94026e775d436e78908544a[m
+Author: Dareau <nidareau@yahoo.fr>
+Date:   Sat Feb 6 18:59:14 2016 +0100
+
+    Changement parametre BDD pour test serveur
+
+[33mcommit f413e7ae5156f4d4da0897e2d94c2598e648a735[m
+Author: Dareau <nidareau@yahoo.fr>
+Date:   Sat Feb 6 18:02:46 2016 +0100
+
+    Push forced to master branch
+
+[33mcommit 156b6f7bb87c63fd691d75ab5f36d640f2facaeb[m
+Merge: 7ff4693 522e3b4
+Author: Nerwin <hippolyte.lacroix@epsi.fr>
+Date:   Wed Feb 3 09:45:20 2016 +0100
+
+    Merge branch 'master' of https://github.com/Nerwin/campaign-mailer
+
+[33mcommit 522e3b453c836c11cb5b83a5ccb88a6dfa6ef9c2[m
+Author: Lacroix Hippolyte <hippolyte.lacroix@epsi.fr>
+Date:   Wed Feb 3 09:44:50 2016 +0100
+
+    Create README.md
+
+[33mcommit 7ff4693b6affd64d68d9e1da202dcb2ab39d2318[m
+Author: Nerwin <hippolyte.lacroix@epsi.fr>
+Date:   Wed Feb 3 09:43:47 2016 +0100
+
+    Initialisation du repository
