@@ -4,8 +4,8 @@ session_start();
 
 if(isset($_POST['btn-login']))
 {
-    $login = mysql_real_escape_string($_POST['login']);
-    $upass = mysql_real_escape_string($_POST['pass']);
+    $login = $_POST['login'];
+    $upass = $_POST['pass'];
 
     
     

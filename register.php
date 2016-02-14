@@ -9,9 +9,9 @@ if(isset($_SESSION['user'])!="")
 
 if(isset($_POST['btn-signup']))
 {
-    $login = mysql_real_escape_string($_POST['login']);
-    $mail = mysql_real_escape_string($_POST['mail']);
-    $password = md5(mysql_real_escape_string($_POST['password']));
+    $login = $_POST['login'];
+    $mail = $_POST['mail'];
+    $password = md5($_POST['password']);
     
     $sql="INSERT INTO user(login,mail,password) VALUES('$login','$mail','$password')";
     $dbh->exec($sql);

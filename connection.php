@@ -5,8 +5,6 @@
 // $username='root';
 // $password='';
 
-
-//CONNECTION BDD SERVEUR
 $hostname='localhost';
 $username='root';
 $password='root';
