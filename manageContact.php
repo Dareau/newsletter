@@ -5,18 +5,13 @@ session_start();
      //----------------------------------------------- 
      //DECLARE LES VARIABLES 
      //----------------------------------------------- 
-
-     $destinataire=$_POST['destinataire'];
-     $email_expediteur='hostmaster@appliweb.lan'; 
+     
+     $destinataire='hostmaster@appliweb.lan';
+     $email_expediteur=$_POST['email']; 
      $email_reply='hostmaster@appliweb.lan';
+     $objet=$_POST['objet'];
 
-     $message_texte='Bonjour,'."\n\n".'Voici un message au format texte'; 
-     $message_html='<html> 
-     <head> 
-     <title>Titre</title> 
-     </head> 
-     <body>Test de message</body> 
-     </html>'; 
+     $message_texte=$_POST['message']; 
 
      //----------------------------------------------- 
      //GENERE LA FRONTIERE DU MAIL ENTRE TEXTE ET HTML 
@@ -43,17 +38,9 @@ session_start();
      $message .= 'Content-Transfer-Encoding: 8bit'."\n\n"; 
      $message .= $message_texte."\n\n"; 
 
-     //----------------------------------------------- 
-     //MESSAGE HTML 
-     //----------------------------------------------- 
-     $message .= '--'.$frontiere."\n";
-     $message .= 'Content-Type: text/html; charset="iso-8859-1"'."\n"; 
-     $message .= 'Content-Transfer-Encoding: 8bit'."\n\n"; 
-     $message .= $message_html."\n\n"; 
-
      $message .= '--'.$frontiere."\n"; 
 
-     if(mail($destinataire,'Sujet',$message,$headers)) 
+     if(mail($destinataire,$objet,$message,$headers)) 
      { 
           echo 'Le mail a été envoyé'; 
      } 
