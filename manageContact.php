@@ -24,12 +24,11 @@ session_start();
     //  //HEADERS DU MAIL 
     //  //----------------------------------------------- 
 
-    //  $headers = 'From: "Nom<"'.$email_expediteur.'">'."\n"; 
-    //  $headers .= 'Return-Path: <'.$email_reply.'>'."\n"; 
+    //  $headers = 'From: Nom<"'.$email_expediteur.'">'."\n"; 
+    //  $headers .= 'Return-Path: <""'.$email_reply.'">'."\n"; 
     //  $headers .= 'MIME-Version: 1.0'."\n"; 
     //  $headers .= 'Content-Type: multipart/alternative; boundary="'.$frontiere.'"'; 
 
-    //  echo "CECI EST LE HEADER " . $headers;
     //  //----------------------------------------------- 
     //  //MESSAGE TEXTE 
     //  //----------------------------------------------- 
@@ -41,6 +40,15 @@ session_start();
     //  $message .= $message_texte."\n\n"; 
 
     //  $message .= '--'.$frontiere."\n";
+
+    //  if(mail($destinataire,$objet,$message,$headers)) 
+    //  { 
+    //       echo 'Le mail a été envoyé'; 
+    //  } 
+    //  else 
+    //  { 
+    //       echo 'Le mail n\'a pu être envoyé'; 
+    //  } 
      
      
      
@@ -53,28 +61,15 @@ session_start();
     $sujet = $_POST['objet'];
     
     /* Construction du message */
-    $msg  = 'Bonjour,'."\r\n\r\n";
-    $msg .= 'Ce mail a été envoyé depuis monsite.com par nous même' . "\r\n\r\n";
-    $msg .= 'Voici le message qui vous est adressé :'."\r\n";
-    $msg .= '***************************'."\r\n";
+    $msg = '***** Votre message *******'."\r\n";
     $msg .= $_POST['message']."\r\n";
     $msg .= '***************************'."\r\n";
     
     /* En-têtes de l'e-mail */
-    $headers = 'From: bitch <"'.$expediteur.'">'."\r\n\r\n";
+    $headers = 'From: admin <"'.$expediteur.'">'."\r\n\r\n";
     
     /* Envoi de l'e-mail */
     mail($to, $sujet, $msg, $headers);
-    header('Location: contact.php');
+    //header('Location: contact.php');
     
-
-    //  echo "CECI EST LE MESSAGE " . $message;
-    //  if(mail($destinataire,$objet,$message,$headers)) 
-    //  { 
-    //       echo 'Le mail a été envoyé'; 
-    //  } 
-    //  else 
-    //  { 
-    //       echo 'Le mail n\'a pu être envoyé'; 
-    //  } 
 ?>

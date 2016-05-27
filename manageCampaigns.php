@@ -103,8 +103,8 @@ session_start();
             //----------------------------------------------- 
             //HEADERS DU MAIL 
             //----------------------------------------------- 
-            $headers = 'From: "Nom" <'.$email_expediteur.'>'."\n"; 
-            $headers .= 'Return-Path: <'.$email_reply.'>'."\n"; 
+            $headers = 'From: Nom <"'.$email_expediteur.'">'."\n"; 
+            $headers .= 'Return-Path: <"'.$email_reply.'">'."\n"; 
             $headers .= 'MIME-Version: 1.0'."\n"; 
             $headers .= 'Content-Type: multipart/alternative; boundary="'.$frontiere.'"'; 
 
