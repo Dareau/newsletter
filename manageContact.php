@@ -65,6 +65,8 @@ session_start();
     
     /* Envoi de l'e-mail */
     mail($to, $sujet, $msg, $headers);
+    header('Location: contact.php');
+    
 
     //  echo "CECI EST LE MESSAGE " . $message;
     //  if(mail($destinataire,$objet,$message,$headers)) 
