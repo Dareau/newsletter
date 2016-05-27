@@ -82,53 +82,67 @@ session_start();
         
         foreach ($dbh->query($sql_list_mail) as $mail) 
         {
+            /* Destinataire (votre adresse e-mail) */
+            $to = $mail['contact_mail'];
+            $expediteur = 'user@admin.Fr';
+            $sujet = $model_object;
             
-            //----------------------------------------------- 
-            //DECLARE LES VARIABLES 
-            //----------------------------------------------- 
+            /* Construction du message */
+            $msg = '***** Votre message *******'."\r\n";
+            $msg .= $model_content."\r\n";
+            $msg .= '***************************'."\r\n";
             
-            $destinataire=$mail['contact_mail'];
-            $email_expediteur='toto@tata.fr';
-            $email_reply=$mail['contact_mail'];
+            /* En-têtes de l'e-mail */
+            $headers = 'From: admin <"'.$expediteur.'">'."\r\n\r\n";
             
-            $objet=$model_object;
-            $message_texte=$model_content; 
+            /* Envoi de l'e-mail */
+            mail($to, $sujet, $msg, $headers);
+            header('Location: contact.php');
             
-            //----------------------------------------------- 
-            //GENERE LA FRONTIERE DU MAIL ENTRE TEXTE ET HTML 
-            //----------------------------------------------- 
+            // //----------------------------------------------- 
+            // //DECLARE LES VARIABLES 
+            // //----------------------------------------------- 
+            
+            // $destinataire=$mail['contact_mail'];
+            // $email_expediteur='toto@tata.fr';
+            // $email_reply=$mail['contact_mail'];
+            
+            // $objet=$model_object;
+            // $message_texte=$model_content; 
+            
+            // //----------------------------------------------- 
+            // //GENERE LA FRONTIERE DU MAIL ENTRE TEXTE ET HTML 
+            // //----------------------------------------------- 
 
-            $frontiere = '-----=' . md5(uniqid(mt_rand())); 
+            // $frontiere = '-----=' . md5(uniqid(mt_rand())); 
 
-            //----------------------------------------------- 
-            //HEADERS DU MAIL 
-            //----------------------------------------------- 
-            $headers = 'From: Nom <"'.$email_expediteur.'">'."\n"; 
-            $headers .= 'Return-Path: <"'.$email_reply.'">'."\n"; 
-            $headers .= 'MIME-Version: 1.0'."\n"; 
-            $headers .= 'Content-Type: multipart/alternative; boundary="'.$frontiere.'"'; 
+            // //----------------------------------------------- 
+            // //HEADERS DU MAIL 
+            // //----------------------------------------------- 
+            // $headers = 'From: Nom <"'.$email_expediteur.'">'."\n";  
 
-            //----------------------------------------------- 
-            //MESSAGE TEXTE 
-            //-----------------------------------------------
-            $message = 'This is a multi-part message in MIME format.'."\n\n"; 
+            // //----------------------------------------------- 
+            // //MESSAGE TEXTE 
+            // //-----------------------------------------------
+            // $message = 'This is a multi-part message in MIME format.'."\n\n"; 
 
-            $message .= '--'.$frontiere."\n"; 
-            $message .= 'Content-Type: text/plain; charset="iso-8859-1"'."\n"; 
-            $message .= 'Content-Transfer-Encoding: 8bit'."\n\n"; 
-            $message .= $message_texte."\n\n"; 
+            // $message .= '--'.$frontiere."\n"; 
+            // $message .= 'Content-Type: text/plain; charset="iso-8859-1"'."\n"; 
+            // $message .= 'Content-Transfer-Encoding: 8bit'."\n\n"; 
+            // $message .= $message_texte."\n\n"; 
 
-            $message .= '--'.$frontiere."\n"; 
+            // $message .= '--'.$frontiere."\n"; 
 
-            if(mail($destinataire,$objet,$message,$headers)) 
-            { 
-                echo 'Le mail a été envoyé'; 
-            } 
-            else 
-            { 
-                echo 'Le mail n\'a pu être envoyé'; 
-            } 
-        }
+            // if(mail($destinataire,$objet,$message,$headers)) 
+            // { 
+            //     echo 'Le mail a été envoyé'; 
+            // } 
+            // else 
+            // { 
+            //     echo 'Le mail n\'a pu être envoyé'; 
+            // } 
+            
+            }
         //header('Location: campaigns.php');
     }
 ?>
