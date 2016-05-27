@@ -6,7 +6,8 @@ session_start();
      //DECLARE LES VARIABLES 
      //----------------------------------------------- 
      
-     $destinataire='hostmaster@appliweb.lan';
+     //$destinataire='adminmail';
+     $destinataire=$_POST['emaildest'];
      $email_expediteur=$_POST['email']; 
      $email_reply='hostmaster@appliweb.lan';
      $objet=$_POST['objet'];

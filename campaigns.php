@@ -103,7 +103,7 @@ if(!isset($_SESSION['user']))
                         </div>
                         <div class="col-md-6 div-contact">
                             <?php if(!empty($_GET['id'])) { ?>
-                            <form method="post" action="manageCampaigns.php?type=send&id_model=<?php echo $campaign_id; ?>">
+                            <form method="post" action="manageCampaigns.php?type=send&id_model=<?php echo $model_id; ?>">
                                 <table>
                                     <tr>
                                         <td><i class="fa fa-flag fa-2"></i></td>

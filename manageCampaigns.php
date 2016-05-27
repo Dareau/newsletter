@@ -58,12 +58,15 @@ session_start();
         $id_model=$_GET['id_model'];
         $list_id=$_POST['list_id'];
         
+        echo $id_model;
+        echo $list_id;
+        
         //RECUPERATION DES INFOS DU MODEL
         $sql_model_details = "SELECT *
                               FROM model
                               WHERE model_id=". $id_model;
                               
-        foreach ($dbh->query($sql_model_detailssql) as $model)
+        foreach ($dbh->query($sql_model_details) as $model)
         {
             $model_name=$model['model_name'];
             $model_object=$model['model_object'];
@@ -129,6 +132,6 @@ session_start();
                 echo 'Le mail n\'a pu être envoyé'; 
             } 
         }
-        header('Location: campaigns.php');
+        //header('Location: campaigns.php');
     }
 ?>
