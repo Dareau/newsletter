@@ -52,6 +52,14 @@ session_start();
     }  
     
 //MULTI-ENVOIE D'UN MODELE A UNE LISTE
+    $sql = "SELECT * FROM user
+            WHERE id='" . $_SESSION['user'] . "'";
+    foreach ($dbh->query($sql) as $row)
+    {
+        $user_login = $row['login'];
+        $user_mail = $row['mail'];
+    }
+    
     if ($_GET['type'] == 'send')
     {
         /*VALUES*/
@@ -84,20 +92,22 @@ session_start();
         {
             /* Destinataire (votre adresse e-mail) */
             $to = $mail['contact_mail'];
-            $expediteur = 'user@admin.Fr';
+            $expediteur = $user_mail;
+            $expediteur_login = user_login;
             $sujet = $model_object;
             
             /* Construction du message */
             $msg = '***** Votre message *******'."\r\n";
             $msg .= $model_content."\r\n";
             $msg .= '***************************'."\r\n";
+            $msg .= $model_signature;
             
             /* En-têtes de l'e-mail */
-            $headers = 'From: admin <"'.$expediteur.'">'."\r\n\r\n";
+            $headers = 'From: "' . $expediteur_login . '" <"'.$expediteur.'">'."\r\n\r\n";
             
             /* Envoi de l'e-mail */
             mail($to, $sujet, $msg, $headers);
-            header('Location: contact.php');
+            header('Location: campaigns.php');
             
             // //----------------------------------------------- 
             // //DECLARE LES VARIABLES 
