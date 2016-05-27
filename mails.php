@@ -31,6 +31,19 @@ if(!empty($_GET['model_id']))
     </script>
     <title>Mes Mails</title>
 </head>
+<?php 
+    if(!empty($_GET['error']))
+    {
+        if($_GET['error'] == 'true')
+        {
+            echo '<div class="alert alert-danger" role="alert">Erreur : Modèle déjà existant </div>';
+        }
+        elseif ($_GET['error'] == 'false') 
+        {
+            echo '<div class="alert alert-success" role="alert">Succès : Opération réussie</div>';
+        }
+    }
+?>
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">

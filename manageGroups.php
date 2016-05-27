@@ -9,8 +9,16 @@ session_start();
         $nom=$_POST['name'];   
         $sql = "INSERT INTO contact_list (list_name, id_user) VALUES ( '".utf8_decode($nom)."', '" . $_SESSION['user'] . "')";
         // use exec() because no results are returned
-        $dbh->exec($sql);
-        header('Location: groups.php');
+        try{
+            $dbh->exec($sql);
+        }
+        catch(PDOException $ex){ 
+            header('Location: groups.php?error=true'); 
+        }
+        if(empty($ex))
+        {
+            header('Location: groups.php?error=false');
+        }
     }
 //SUPPRESSION D'UN GROUPE DANS LA BDD
     if ($_GET['type'] == 'delete')
@@ -55,8 +63,16 @@ session_start();
         $name=$_POST['name'];
   
         $sql ="UPDATE contact_list SET list_name='" . $name . "' WHERE list_id='" .$id_list . "'";
-        $dbh->exec($sql);
-        header('Location: groups.php');    
+        try{
+            $dbh->exec($sql);
+        }
+        catch(PDOException $ex){ 
+            header('Location: groups.php?error=true'); 
+        }
+        if(empty($ex))
+        {
+            header('Location: groups.php');
+        }  
     }
 //EDIT D'UN CONTACT    
     if(isset($_POST['updateContact']) && $_GET['type'] == 'updateContact')

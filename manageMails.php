@@ -13,9 +13,17 @@ session_start();
         
         $sql = "INSERT INTO model (model_name, model_object, model_content, model_signature, user_id) 
                 VALUES ( '".utf8_decode($nom)."','".utf8_decode($object)."','".utf8_decode($content)."','".utf8_decode($signature)."', '" . $_SESSION['user'] . "')";
-        // use exec() because no results are returned
-        $dbh->exec($sql);
-        header('Location: mails.php');
+        // use exec() because no results are returned        
+        try{
+            $dbh->exec($sql);
+        }
+        catch(PDOException $ex){ 
+            header('Location: mails.php?error=true'); 
+        }
+        if(empty($ex))
+        {
+            header('Location: mails.php?error=false');     
+        }
     }
 //SUPPRESSION D'UN MODEL DANS LA BDD
     if ($_GET['type'] == 'delete')
@@ -45,7 +53,16 @@ session_start();
                 model_content='" . $model_content . "', 
                 model_signature='" . $model_signature . "'
                 WHERE model_id='" . $model_id . "'";
-        $dbh->exec($sql);
-        header('Location: mails.php');    
+                
+        try{
+            $dbh->exec($sql);
+        }
+        catch(PDOException $ex){ 
+            header('Location: mails.php?error=true'); 
+        }
+        if(empty($ex))
+        {
+            header('Location: mails.php');     
+        }    
     }  
 ?>

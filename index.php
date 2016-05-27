@@ -12,23 +12,14 @@ if(isset($_POST['btn-login']))
     
     $sql = "SELECT * FROM user WHERE login='" . $login . "'";
     foreach ($dbh->query($sql) as $row)
-    {
-        $row['password'];
-        $row['login'];
-        $row['mail'];
-        
+    {   
         if($row['password']==md5($upass))
         {
             $_SESSION['user'] = $row['id'];
             header("Location: contacts.php");
         }
-        else
-        {
-            ?>
-            <script>alert('wrong details');</script>
-            <?php
-        } 
     }
+    echo '<div style="margin-bottom:-30px;" class="alert alert-danger" role="alert">Erreur : Informations incorrectes </div>';
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

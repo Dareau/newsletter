@@ -25,6 +25,11 @@ font-size:12px;
 
 /*######################## Tuiles ##################################*/
 
+#error{
+    z-index: 99;
+    background-color: red;
+}
+
 .div-contact-list{
     background-color: #F9F9F9;
     height: 200px;

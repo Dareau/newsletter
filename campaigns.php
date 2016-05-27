@@ -52,7 +52,19 @@ if(!isset($_SESSION['user']))
     </script>
     <title>Mes campagnes</title>
 </head>
-
+<?php 
+    if(!empty($_GET['error']))
+    {    
+        if($_GET['error'] == 'true')
+        {
+            echo '<div class="alert alert-danger" role="alert">Erreur : Campagne déjà existante </div>';
+        }
+        elseif ($_GET['error'] == 'false') 
+        {
+            echo '<div class="alert alert-success" role="alert">Succès : Opération réussie</div>';
+        }
+    }
+?>
         <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">

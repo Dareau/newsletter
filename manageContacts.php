@@ -12,8 +12,16 @@ session_start();
         $sql = "INSERT INTO contact (contact_id, contact_mail, contact_name, id_user) 
                 VALUES ('" . $id_contact . "', '".utf8_decode($mail)."','".utf8_decode($nom)."', '" . $_SESSION['user'] . "')";
         // use exec() because no results are returned
-        $dbh->exec($sql);
-        header('Location: contacts.php');
+        try{
+            $dbh->exec($sql);
+        }
+        catch(PDOException $ex){ 
+            header('Location: contacts.php?error=true'); 
+        }
+        if(empty($ex))
+        {
+            header('Location: contacts.php?error=false');     
+        }
     }
 //SUPPRESSION D'UN CONTACT DANS LA BDD
     if ($_GET['type'] == 'delete')
@@ -41,8 +49,16 @@ session_start();
         $sql2 ="UPDATE contact 
                 SET contact_name='" . $name . "', contact_mail='" . $mail . "' 
                 WHERE contact_id='" . $id_contact . "'";
-        $dbh->exec($sql2);
-        header('Location: contacts.php');    
+        try{
+            $dbh->exec($sql2);
+        }
+        catch(PDOException $ex){ 
+            header('Location: contacts.php?error=true'); 
+        }
+        if(empty($ex))
+        {
+            header('Location: contacts.php?error=false');     
+        }
     }  
 //IMPORT FICHIER CSV
     if(isset($_POST['importer']) && $_GET['type'] == 'importer')

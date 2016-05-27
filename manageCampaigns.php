@@ -14,8 +14,16 @@ session_start();
                 (campaign_name,id_model,id_contact_list,id_user)
                 VALUES ('".utf8_decode($nom)."', '" . utf8_decode($id_model) . "', '" . utf8_decode($id_list) . "', '" . $_SESSION['user'] . "')";
         
-        $dbh->exec($sql);
-        header('Location: campaigns.php');
+        try{
+            $dbh->exec($sql);
+        }
+        catch(PDOException $ex){ 
+            header('Location: campaigns.php?error=true'); 
+        }
+        if(empty($ex))
+        {
+            header('Location: campaigns.php?error=false');     
+        }
     }
     
 //SUPPRESSION D'UNE CAMPAGNE DE LA BDD
@@ -37,18 +45,21 @@ session_start();
         $model_id=$_POST['select_model'];
         $list_id=$_POST['select_list'];
         
-        // echo $campaign_id;
-        // echo $campaign_name;
-        // echo $model_id;
-        // echo $list_id;
-        
         $sql ="UPDATE campaign 
                 SET campaign_name='" . $campaign_name . "', 
                 id_model='" . $model_id . "', 
                 id_contact_list='" . $list_id . "' 
                 WHERE campaign_id='" . $campaign_id . "'";
-        $dbh->exec($sql);
-        header('Location: campaigns.php');    
+        try{
+            $dbh->exec($sql);
+        }
+        catch(PDOException $ex){ 
+            header('Location: campaigns.php?error=true'); 
+        }
+        if(empty($ex))
+        {
+            header('Location: campaigns.php');     
+        }   
     }  
     
 //MULTI-ENVOIE D'UN MODELE A UNE LISTE

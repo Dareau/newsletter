@@ -2,10 +2,10 @@
 
 session_start();
 
-if(isset($_SESSION['user'])!="")
-{
-    header("Location: index.php");
-}
+// if(isset($_SESSION['user'])!="")
+// {
+//     header("Location: index.php");
+// }
 
 if(isset($_POST['btn-signup']))
 {
@@ -14,9 +14,16 @@ if(isset($_POST['btn-signup']))
     $password = md5($_POST['password']);
     
     $sql="INSERT INTO user(login,mail,password) VALUES('$login','$mail','$password')";
-    $dbh->exec($sql);
     
-    header('Location: index.php');
+    try{
+        // INSERT new account
+            $dbh->exec($sql);
+        }
+        catch(PDOException $ex){ echo '<div class="alert alert-danger" role="alert">Erreur : Utilisateur déjà existant</div>'; }
+    if (empty($ex))
+    {
+        header('Location: index.php');                                       
+    }
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
