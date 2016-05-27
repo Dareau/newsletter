@@ -58,9 +58,6 @@ session_start();
         $id_model=$_GET['id_model'];
         $list_id=$_POST['list_id'];
         
-        echo $id_model;
-        echo $list_id;
-        
         //RECUPERATION DES INFOS DU MODEL
         $sql_model_details = "SELECT *
                               FROM model
