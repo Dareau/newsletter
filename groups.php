@@ -49,6 +49,13 @@ if(!isset($_SESSION['user']))
                     document.getElementById('formUpdateList').style.visibility="hidden";
                 }
         }
+        function confirmDelete(listId)
+        {
+            if (confirm("Vous êtes sur le point de supprimer un groupe. Continuer ?") == true) 
+            {
+                document.location.href="manageGroups.php?type=delete&list_id=" + listId;
+            }
+        }
     </script> 
     <?php
     if(!empty($_GET['id']))
@@ -76,7 +83,9 @@ if(!isset($_SESSION['user']))
                         <div class="col-md-6 div-contact">
                             <table class="col-md-12 table table-hover table-design">
                                 <?php 
-                                    $sql = "SELECT list_name, list_id FROM contact_list WHERE id_user=" . $_SESSION['user'];
+                                    $sql = "SELECT list_name, list_id 
+                                            FROM contact_list 
+                                            WHERE id_user=" . $_SESSION['user'];
                                     foreach ($dbh->query($sql) as $row)
                                     {
                                         echo "
@@ -99,7 +108,7 @@ if(!isset($_SESSION['user']))
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a style='color: black' title='Supprimer' href='manageGroups.php?type=delete&list_id=". $row["list_id"] . "'>
+                                                    <a style='color: black;cursor: pointer' title='Supprimer' onclick='confirmDelete(\"" . $row["list_id"] . "\")'>
                                                         <i class='fa fa-trash-o fa-2'></i>
                                                     </a>
                                                 </td>
@@ -114,7 +123,13 @@ if(!isset($_SESSION['user']))
                             <?php 
                             if(!empty($_GET['id']))
                             {
-                                $sql = "SELECT contact_name, contact_mail, contact_id FROM contact, appartient, contact_list WHERE appartient.id_contact_list = contact_list.list_id AND contact.contact_id = appartient.id_contact AND contact_list.list_id =". $_GET['id'] . " AND contact.id_user=" . $_SESSION['user'] ." AND contact_list.id_user=" . $_SESSION['user'];
+                                $sql = "SELECT contact_name, contact_mail, contact_id 
+                                        FROM contact, appartient, contact_list 
+                                        WHERE appartient.id_contact_list = contact_list.list_id 
+                                        AND contact.contact_id = appartient.id_contact 
+                                        AND contact_list.list_id =". $_GET['id'] . " 
+                                        AND contact.id_user=" . $_SESSION['user'] ." 
+                                        AND contact_list.id_user=" . $_SESSION['user'];
                                 foreach ($dbh->query($sql) as $row)
                                 {
                                     echo "
@@ -162,7 +177,12 @@ if(!isset($_SESSION['user']))
                             <?php 
                             if(!empty($_GET['id']))
                             {
-                                $sql = "SELECT distinct (contact.contact_name), contact.contact_id, contact.contact_mail FROM contact WHERE contact_name not in (SELECT contact_name FROM contact, appartient, contact_list WHERE appartient.id_contact_list = contact_list.list_id AND contact.contact_id = appartient.id_contact AND contact_list.list_id ='" . $_GET['id'] . "')";
+                                $sql = "SELECT distinct (contact.contact_name), contact.contact_id, contact.contact_mail 
+                                FROM contact 
+                                WHERE contact_name not in (SELECT contact_name FROM contact, appartient, contact_list 
+                                                            WHERE appartient.id_contact_list = contact_list.list_id 
+                                                            AND contact.contact_id = appartient.id_contact 
+                                                            AND contact_list.list_id ='" . $_GET['id'] . "')";
                                 foreach ($dbh->query($sql) as $row)
                                 {
                                     echo "
@@ -196,7 +216,7 @@ if(!isset($_SESSION['user']))
                         <div class="col-md-12" name="formUpdateList" id="formUpdateList" style="visibility: hidden"> 
                             <form method="post" action="manageGroups.php?type=updateList"> 
                                 <div class="form-group">
-                                    <input style="visibility: hidden" class="form-control" name = "input_id_list" id="input_update_list2"></input>
+                                    <input style="visibility: hidden" class="form-control" name ="input_id_list" id="input_update_list2"></input>
                                     <label>Nom du groupe : </label>
                                     <input class="form-control" id="input_update_list" type="text" name="name" placeholder="Nom du groupe" required><br>
                                     <input class="btn btn-default btn-lg btn-block" type="submit" name="updateGroup" value="Modifier">

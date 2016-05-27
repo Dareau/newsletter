@@ -21,19 +21,19 @@ if(!isset($_SESSION['user']))
                             <div class="form-group">
                                 <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input name="email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                    <input name="email" type="email" class="form-control" id="inputEmail3" placeholder="Email" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputObjet" class="col-sm-2 control-label">Objet</label>
                                 <div class="col-sm-10">
-                                    <input name="objet" type="text" class="form-control" id="inputObjet" placeholder="Objet">
+                                    <input name="objet" type="text" class="form-control" id="inputObjet" placeholder="Objet" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="textareaMessage" class="col-sm-2 control-label">Message</label>
                                 <div class="col-sm-10">
-                                    <textarea name="message" rows="7" class="form-control" id="textareaMessage" placeholder="Message"></textarea>
+                                    <textarea name="message" rows="7" class="form-control" id="textareaMessage" placeholder="Message"required></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -46,10 +46,5 @@ if(!isset($_SESSION['user']))
                 </div>
             </div>
         </div>
-    <!-- /#wrapper -->
-    
-    <!-- Scripts JS -->
-    <script src="../js/jquery.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-</body>
+    </body>
 </html>

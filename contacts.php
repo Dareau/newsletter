@@ -39,7 +39,13 @@ if(!isset($_SESSION['user']))
                        
             });
         }
-        
+        function confirmDelete(contactId)
+        {
+            if (confirm("Vous êtes sur le point de supprimer un contact. Continuer ?") == true) 
+            {
+                document.location.href="manageContacts.php?type=delete&contact_id=" + contactId;
+            }
+        }
     </script>
     <title>Mes Contacts</title>
 </head>
@@ -57,7 +63,9 @@ if(!isset($_SESSION['user']))
                         <div class="col-md-6 div-contact">
                             <table class="col-md-12 table table-hover table-design">
                                 <?php 
-                                    $sql = "SELECT contact_name, contact_id, contact_mail FROM contact WHERE id_user=" . $_SESSION['user'];
+                                    $sql = "SELECT contact_name, contact_id, contact_mail 
+                                            FROM contact 
+                                            WHERE id_user=" . $_SESSION['user'];
                                     foreach ($dbh->query($sql) as $row)
                                     {
                                         $id_contact=$row['contact_id'];
@@ -70,12 +78,12 @@ if(!isset($_SESSION['user']))
                                                 <td id='td-contact-name-" . $row['contact_id'] . "'>" . $row['contact_name'] . "</td>
                                                 <td id='td-contact-mail-" . $row['contact_id'] . "'>" . $row['contact_mail'] . "</td>
                                                 <td>
-                                                    <a style='color: black;cursor: pointer' title='modifier' onclick='popFormContact(\"" . $id_contact . "\")'>
+                                                    <a style='color: black;cursor: pointer' title='Modifier' onclick='popFormContact(\"" . $id_contact . "\")'>
                                                         <i class='fa fa-cog fa-2'></i>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a style='color: black' title='Supprimer' href='manageContacts.php?type=delete&contact_id=". $row["contact_id"] . "'>
+                                                    <a style='color: black;cursor: pointer' title='Supprimer' onclick='confirmDelete(\"" . $row["contact_id"] . "\")'>
                                                         <i class='fa fa-trash-o fa-2'></i>
                                                     </a>
                                                 </td>
@@ -119,7 +127,9 @@ if(!isset($_SESSION['user']))
                             <form method="post" action="manageContacts.php?type=importer" enctype="multipart/form-data">
                                 <input onclick='checkList()' id='checkAll' type='checkBox' name=''/><strong>Cocher tout</strong><br/>                                     
                                     <?php 
-                                        $sql = "SELECT list_name, list_id FROM contact_list WHERE id_user=" . $_SESSION['user'];
+                                        $sql = "SELECT list_name, list_id 
+                                                FROM contact_list 
+                                                WHERE id_user=" . $_SESSION['user'];
                                         foreach ($dbh->query($sql) as $row)
                                         {
                                             echo "<input class='is-checked' type='checkbox' name='radio_groups_name[]' value='" . $row['list_id'] . "'>" . $row['list_name']. "</br>";                                                

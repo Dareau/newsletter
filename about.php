@@ -16,6 +16,7 @@ if(!isset($_SESSION['user']))
                 <div class="row">
                     <div class="col-lg-12">
                         <h1><i class="fa fa-info-circle fa-5"></i>&nbsp;Qui sommes nous ?</h1>
+                        <h1>DES PUTAINS DE THUGS LIFE<h1>
                     </div>
                 </div>
             </div>

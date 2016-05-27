@@ -36,9 +36,6 @@ foreach ($dbh->query($sql) as $row)
 </head>
 
 <body>
-    <div class="logout">
-        <a class="logout-a" href='logout.php?logout'>Sign Out from <?php echo $user_login . " / " . $user_mail; ?></a>           
-    </div>
     <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -63,6 +60,9 @@ foreach ($dbh->query($sql) as $row)
                 </li>
                 <li>
                     <a href="contact.php"><i class="fa fa-phone fa-2"></i>&nbsp;Nous contacter</a>
+                </li>
+                <li>
+                    <a href='logout.php?logout'><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Sign Out from <?php echo $user_login; ?></a> 
                 </li>
                 
             </ul>

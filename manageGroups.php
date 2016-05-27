@@ -23,6 +23,9 @@ session_start();
         //Suppression dans la table appartient
         $sql = "DELETE FROM appartient WHERE id_contact_list='". $id ."'";
         $dbh->exec($sql);
+        //Suppression de toutes les campagnes correspondantes
+        $sql = "DELETE FROM campaign WHERE id_contact_list='" . $id . "'";
+        $dbh->exec($sql);
         header('Location: groups.php');
     }
 //SUPPRESSION D'UN UTILISATEUR D'UN GROUPE    
