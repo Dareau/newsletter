@@ -52,12 +52,18 @@ session_start();
      
      
      
-     
+    $sql = "SELECT * FROM user
+            WHERE id='" . $_SESSION['user'] . "'";
+    foreach ($dbh->query($sql) as $row)
+    {
+        $user_login = $row['login'];
+        $user_mail = $row['mail'];
+    }
      
      
     /* Destinataire (votre adresse e-mail) */
     $to = $_POST['emaildest'];
-    $expediteur = $_POST['email'];
+    $expediteur = 'adminmail@newsletter.com';
     $sujet = $_POST['objet'];
     
     /* Construction du message */
@@ -66,10 +72,10 @@ session_start();
     $msg .= '***************************'."\r\n";
     
     /* En-têtes de l'e-mail */
-    $headers = 'From: admin <"'.$expediteur.'">'."\r\n\r\n";
+    $headers = 'From:"' . $user_login . '" <"'.$expediteur.'">'."\r\n\r\n";
     
     /* Envoi de l'e-mail */
     mail($to, $sujet, $msg, $headers);
-    //header('Location: contact.php');
+    header('Location: contact.php');
     
 ?>

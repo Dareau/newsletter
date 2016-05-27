@@ -93,7 +93,7 @@ session_start();
             /* Destinataire (votre adresse e-mail) */
             $to = $mail['contact_mail'];
             $expediteur = $user_mail;
-            $expediteur_login = user_login;
+            $expediteur_login = $user_login;
             $sujet = $model_object;
             
             /* Construction du message */

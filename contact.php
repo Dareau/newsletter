@@ -25,12 +25,6 @@ if(!isset($_SESSION['user']))
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="inputEmaildest" class="col-sm-2 control-label">dest(temp)</label>
-                                <div class="col-sm-10">
-                                    <input name="emaildest" type="email" class="form-control" id="inputEmaildest" placeholder="Email" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label for="inputObjet" class="col-sm-2 control-label">Objet</label>
                                 <div class="col-sm-10">
                                     <input name="objet" type="text" class="form-control" id="inputObjet" placeholder="Objet" required>
