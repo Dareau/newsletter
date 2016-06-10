@@ -70,7 +70,7 @@ session_start();
     $msg = '***** Votre message *******'."\r\n";
     $msg .= $_POST['message']."\r\n";
     $msg .= '***************************'."\r\n";
-    $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php" alt="" width="1" height="1" border="0"/>';
+    $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php" alt="" width="0" height="0" border="0"/>';
     
     /* En-têtes de l'e-mail */
     $headers = 'From:"' . $user_login . '" <"'.$expediteur.'">'."\n";

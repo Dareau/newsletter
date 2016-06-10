@@ -101,6 +101,9 @@ session_start();
         
         foreach ($dbh->query($sql_list_mail) as $mail) 
         {
+            //CREATION DE LA LIGNE DE TRACKING
+            $sql = "INSERT INTO tracking (id_contact, id_campaign, ouvert)
+                    VALUES (" . $mail['contact_mail'] . "," . $campaign_id . ",'0')";
             /* Destinataire (votre adresse e-mail) */
             $to = $mail['contact_mail'];
             $expediteur = $user_mail;
@@ -112,9 +115,11 @@ session_start();
             $msg .= $model_content."\r\n";
             $msg .= '***************************'."\r\n";
             $msg .= $model_signature;
+            $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php?id_campaign="' . $campaign_id . '&id_contact=' . $to . '" alt="" width="1" height="1" border="0"/>';
             
             /* En-têtes de l'e-mail */
-            $headers = 'From: "' . $expediteur_login . '" <"'.$expediteur.'">'."\r\n\r\n";
+            $headers = 'From: "' . $expediteur_login . '" <"'.$expediteur.'">'."\n";
+            $headers .= 'Content-Type: text/html; charset=\"iso-8859-1\"' . "\n";
             
             /* Envoi de l'e-mail */
             mail($to, $sujet, $msg, $headers);
