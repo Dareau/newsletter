@@ -118,7 +118,7 @@ session_start();
             $msg .= $model_content."\r\n";
             $msg .= '***************************'."\r\n";
             $msg .= $model_signature;
-            $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php?id_campaign="' . $campaign_id . '&id_contact=' . $mail['contact_id'] . '" alt="" width="1" height="1" border="0"/>';
+            $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php?id_campaign=' . $id_campaign . '&id_contact=' . $mail['contact_id'] . '" alt="" width="1" height="1" border="0"/>';
             
             /* En-têtes de l'e-mail */
             $headers = 'From: "' . $expediteur_login . '" <"'.$expediteur.'">'."\n";
