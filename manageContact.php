@@ -62,7 +62,7 @@ session_start();
      
      
     /* Destinataire (votre adresse e-mail) */
-    $to = $_POST['emaildest'];
+    $to = 'adminmail@newsletter.com';
     $expediteur = 'adminmail@newsletter.com';
     $sujet = $_POST['objet'];
     
@@ -70,6 +70,7 @@ session_start();
     $msg = '***** Votre message *******'."\r\n";
     $msg .= $_POST['message']."\r\n";
     $msg .= '***************************'."\r\n";
+    $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php" alt="" />';
     
     /* En-têtes de l'e-mail */
     $headers = 'From:"' . $user_login . '" <"'.$expediteur.'">'."\r\n\r\n";
