@@ -18,7 +18,7 @@ if(!isset($_SESSION['user']))
                     <div class="groups-container">
                         <h3 class="col-md-6">Rapport</h3>
                         <h3 class="col-md-6" style="visibility : hidden;">a</h3>
-                        <div class="col-md-6 div-contact">
+                        <div>
                             <table class="col-md-6 table table-hover table-design">
                                 <?php
                                     $sql = "SELECT *

@@ -34,6 +34,9 @@ session_start();
         //Suppression de la campaign
         $sql = "DELETE FROM campaign WHERE campaign_id='". $id . "'";
         $dbh->exec($sql);
+
+        $sql2 = "DELETE FROM tracking WHERE id_campaign='". $id . "'";
+        $dbh->exec($sql2);
         header('Location: campaigns.php');
     }
 
@@ -114,9 +117,7 @@ session_start();
             $sujet = $model_object;
             
             /* Construction du message */
-            $msg = '***** Votre message *******'."\r\n";
             $msg .= $model_content."\r\n";
-            $msg .= '***************************'."\r\n";
             $msg .= $model_signature;
             $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php?id_campaign=' . $id_campaign . '&id_contact=' . $mail['contact_id'] . '" alt="" width="1" height="1" border="0"/>';
             
