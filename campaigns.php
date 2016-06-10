@@ -119,7 +119,7 @@ if(!isset($_SESSION['user']))
                         <!-- Affichange des détails de la campagne -->
                         <div class="col-md-6 div-contact">
                             <?php if(!empty($_GET['id'])) { ?>
-                            <form method="post" action="manageCampaigns.php?type=send&id_model=<?php echo $model_id; ?>">
+                            <form method="post" action="manageCampaigns.php?type=send&id_model=<?php echo $model_id; ?>&id_campaign=<?php echo $_GET['id']; ?>">
                                 <table>
                                     <tr>
                                         <td><i class="fa fa-flag fa-2"></i></td>
@@ -152,7 +152,7 @@ if(!isset($_SESSION['user']))
                                     <tr>
                                         <td><i class='fa fa-users fa-2'></i></td>
                                         <td><label>Liste de contactes</label></td>
-                                        <td colspan="3"><a name="list_id" href='groups.php?id="<?php echo $list_id ;?>"'><?php echo $list_name ; ?></a></td>
+                                        <td colspan="3"><a name="list_id" href='groups.php?id=<?php echo $list_id ;?>'><?php echo $list_name ; ?></a></td>
                                         <input type="hidden" name="list_id" value="<?php echo $list_id; ?>" />
                                     </tr>
                                     <tr>

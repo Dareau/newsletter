@@ -74,6 +74,7 @@ session_start();
     if ($_GET['type'] == 'send')
     {
         /*VALUES*/
+        $id_campaign=$_GET['id_campaign'];
         $id_model=$_GET['id_model'];
         $list_id=$_POST['list_id'];
         
@@ -91,8 +92,8 @@ session_start();
         }
         
         //RECUPERATION DE TOUS LES MAILS DE LA LISTE
-        $sql_list_mail = "SELECT contact_name, contact_mail, contact_id 
-                          FROM contact, appartient, contact_list 
+        $sql_list_mail = "SELECT contact_name, contact_mail, contact.contact_id 
+                          FROM contact , appartient, contact_list 
                           WHERE appartient.id_contact_list = contact_list.list_id 
                           AND contact.contact_id = appartient.id_contact 
                           AND contact_list.list_id =". $list_id . " 
@@ -103,7 +104,9 @@ session_start();
         {
             //CREATION DE LA LIGNE DE TRACKING
             $sql = "INSERT INTO tracking (id_contact, id_campaign, ouvert)
-                    VALUES (" . $mail['contact_mail'] . "," . $campaign_id . ",'0')";
+                    VALUES ('" . $mail['contact_id'] . "','" . $id_campaign . "','0')";
+            $dbh->exec($sql);
+
             /* Destinataire (votre adresse e-mail) */
             $to = $mail['contact_mail'];
             $expediteur = $user_mail;
@@ -115,7 +118,7 @@ session_start();
             $msg .= $model_content."\r\n";
             $msg .= '***************************'."\r\n";
             $msg .= $model_signature;
-            $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php?id_campaign="' . $campaign_id . '&id_contact=' . $to . '" alt="" width="1" height="1" border="0"/>';
+            $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php?id_campaign="' . $campaign_id . '&id_contact=' . $mail['contact_id'] . '" alt="" width="1" height="1" border="0"/>';
             
             /* En-têtes de l'e-mail */
             $headers = 'From: "' . $expediteur_login . '" <"'.$expediteur.'">'."\n";
@@ -125,6 +128,6 @@ session_start();
             mail($to, $sujet, $msg, $headers);
             header('Location: campaigns.php'); 
             
-            }
+        }
     }
 ?>
