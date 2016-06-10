@@ -73,8 +73,8 @@ session_start();
     $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php" alt="" />';
     
     /* En-têtes de l'e-mail */
-    $headers = 'From:"' . $user_login . '" <"'.$expediteur.'">'."\r\n\r\n";
-    $header .= "Content-Type: text/html; charset=\"iso-8859-1\"";
+    $headers = 'From:"' . $user_login . '" <"'.$expediteur.'">'."\n";
+    $header .= 'Content-Type: text/html; charset=\"iso-8859-1\"' . "\n";
     
     /* Envoi de l'e-mail */
     mail($to, $sujet, $msg, $headers);
