@@ -74,6 +74,7 @@ session_start();
     
     /* En-têtes de l'e-mail */
     $headers = 'From:"' . $user_login . '" <"'.$expediteur.'">'."\r\n\r\n";
+    $header .= "Content-Type: text/html; charset=\"iso-8859-1\"";
     
     /* Envoi de l'e-mail */
     mail($to, $sujet, $msg, $headers);
