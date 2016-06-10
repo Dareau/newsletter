@@ -35,6 +35,7 @@ session_start();
         $sql = "DELETE FROM campaign WHERE campaign_id='". $id . "'";
         $dbh->exec($sql);
 
+        //Suppression du tracking
         $sql2 = "DELETE FROM tracking WHERE id_campaign='". $id . "'";
         $dbh->exec($sql2);
         header('Location: campaigns.php');
