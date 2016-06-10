@@ -111,6 +111,12 @@ session_start();
                     VALUES ('" . $mail['contact_id'] . "','" . $id_campaign . "','0')";
             $dbh->exec($sql);
 
+            //ON UPDATE LE CHAMP ENVOYE DE LA CAMPAGNE
+            $sql_envoye = "UPDATE campaign
+                           SET envoye='1'
+                           WHERE campaign_id='" . $id_campaign . "'";
+            $dbh->exec($sql_envoye);
+
             /* Destinataire (votre adresse e-mail) */
             $to = $mail['contact_mail'];
             $expediteur = $user_mail;

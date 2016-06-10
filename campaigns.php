@@ -19,6 +19,7 @@ if(!isset($_SESSION['user']))
         foreach ($dbh->query($sql) as $row)
         {
             $campaign_name = $row['campaign_name'];
+            $campaign_envoye = $row['envoye'];
             $campaign_id = $row['campaign_id'];
             $model_name = $row['model_name'];
             $model_id = $row['model_id'];
@@ -156,7 +157,7 @@ if(!isset($_SESSION['user']))
                                         <input type="hidden" name="list_id" value="<?php echo $list_id; ?>" />
                                     </tr>
                                     <tr>
-                                        <td colspan="3"><input class="btn btn-default btn-lg btn-block" type="submit" name="sendCampaign" value="Envoyer"></td>
+                                        <td colspan="3"><input class="btn btn-default btn-lg btn-block" type="submit" name="sendCampaign" value="Envoyer" <?php if($campaign_envoye == '1') echo "disabled"; ?>></td>
                                         <td colspan="2"><a href="rapport.php?campaign_id=<?php echo $campaign_id; ?>" value="Rapport">Rapport</a></td>
                                     </tr>
                                 </table>
