@@ -66,15 +66,15 @@ session_start();
     $expediteur = 'adminmail@newsletter.com';
     $sujet = $_POST['objet'];
     
-    /* Construction du message */
+    // /* Construction du message */
     $msg = '***** Votre message *******'."\r\n";
     $msg .= $_POST['message']."\r\n";
     $msg .= '***************************'."\r\n";
-    $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php" alt="" />';
+    $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php" alt="" width="1" height="1" border="0"/>';
     
     /* En-têtes de l'e-mail */
     $headers = 'From:"' . $user_login . '" <"'.$expediteur.'">'."\n";
-    $header .= 'Content-Type: text/html; charset=\"iso-8859-1\"' . "\n";
+    $headers .= 'Content-Type: text/html; charset=\"iso-8859-1\"' . "\n";
     
     /* Envoi de l'e-mail */
     mail($to, $sujet, $msg, $headers);
