@@ -67,10 +67,8 @@ session_start();
     $sujet = $_POST['objet'];
     
     // /* Construction du message */
-    $msg = '***** Votre message *******'."\r\n";
-    $msg .= $_POST['message']."\r\n";
-    $msg .= '***************************'."\r\n";
-    $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php" alt="" width="0" height="0" border="0"/>';
+    $msg .= $_POST['message']."<br/>";
+    $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php" alt="" width="0" height="0" border="0"/><br/>';
     
     /* En-têtes de l'e-mail */
     $headers = 'From:"' . $user_login . '" <"'.$expediteur.'">'."\n";

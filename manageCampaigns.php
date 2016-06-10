@@ -124,7 +124,7 @@ session_start();
             $sujet = $model_object;
             
             /* Construction du message */
-            $msg .= $model_content."\r\n";
+            $msg .= $model_content."<br/>";
             $msg .= $model_signature;
             $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php?id_campaign=' . $id_campaign . '&id_contact=' . $mail['contact_id'] . '" alt="" width="1" height="1" border="0"/>';
             
