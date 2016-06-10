@@ -10,6 +10,7 @@ if(!isset($_SESSION['user']))
     <script language="Javascript">
         function popFormList(listId)
         {
+                //Script du formulaire update Groups
                 if(document.getElementById('formUpdateList').style.visibility="hidden")
                 {
                     var name = document.getElementById('row-list-'+listId).innerHTML;
@@ -23,6 +24,7 @@ if(!isset($_SESSION['user']))
         
         function popFormContact(contactId)
         {
+                //Script du formulaire update Contacts
                 if(document.getElementById('formUpdateContact').style.visibility="hidden")
                 {
                     var name = document.getElementById('td-contact-name-'+contactId).innerHTML;
@@ -51,7 +53,8 @@ if(!isset($_SESSION['user']))
         }
         function confirmDelete(listId)
         {
-            if (confirm("Vous êtes sur le point de supprimer un groupe. Continuer ?") == true) 
+            //Script de la confirmation de suppression
+            if (confirm("Vous êtes sur le point de supprimer un groupe. Continuer ? \n (ATTENTION : Toutes campagnes utilisants ce groupe sera supprimées)") == true) 
             {
                 document.location.href="manageGroups.php?type=delete&list_id=" + listId;
             }
@@ -60,6 +63,7 @@ if(!isset($_SESSION['user']))
     <?php
     if(!empty($_GET['id']))
     {
+        //Recupération des informations du groupe focus
         $sql = "SELECT list_name FROM contact_list WHERE list_id=" . $_GET['id'];
         foreach ($dbh->query($sql) as $row)
         {
@@ -70,6 +74,7 @@ if(!isset($_SESSION['user']))
     <title>Mes groupes</title>
 </head>
 <?php 
+    //GESTION DES MESSAGES D'ERREUR OU DE SUCCES
     if(!empty($_GET['error']))
     {
         if($_GET['error'] == 'true')
@@ -83,7 +88,6 @@ if(!isset($_SESSION['user']))
     
     }
 ?>
-        <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -175,7 +179,6 @@ if(!isset($_SESSION['user']))
                         <h3 class="col-md-6">Créer un groupe</h3>
                         <h3 class="col-md-6">Mes contacts</h3>
                         <div class="col-md-6 div-list div-ajout">
-                            <!-- TODO : Prendre en compte l'utilisateur connecté pour id_user -->
                             <!-- Formulaire d'ajout de contact_list -->                            
                             <form method="post" action="manageGroups.php?type=add">
                                 <div class="form-group">
@@ -254,8 +257,6 @@ if(!isset($_SESSION['user']))
                 </div>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
     </div>
-    <!-- /#wrapper -->
 </body>
 </html>

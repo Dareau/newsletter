@@ -53,11 +53,19 @@ session_start();
                 model_content='" . $model_content . "', 
                 model_signature='" . $model_signature . "'
                 WHERE model_id='" . $model_id . "'";
-                
-        try{
+
+        echo $model_id;
+        echo $model_name;
+        echo $model_object;
+        echo $model_content;
+        echo $model_signature;
+            
+        try
+        {
             $dbh->exec($sql);
         }
-        catch(PDOException $ex){ 
+        catch(PDOException $ex)
+        { 
             header('Location: mails.php?error=true'); 
         }
         if(empty($ex))

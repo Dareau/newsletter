@@ -8,7 +8,6 @@ session_start();
         /* VALUES */
         $nom=$_POST['name'];   
         $sql = "INSERT INTO contact_list (list_name, id_user) VALUES ( '".utf8_decode($nom)."', '" . $_SESSION['user'] . "')";
-        // use exec() because no results are returned
         try{
             $dbh->exec($sql);
         }
@@ -82,8 +81,8 @@ session_start();
         $name=$_POST['name_contact'];
         $mail=$_POST['mail_contact'];
   
-        $sql2 ="UPDATE contact SET contact_name='" . $name . "', contact_mail='" . $mail . "' WHERE contact_id='" . $id_contact . "'";
-        $dbh->exec($sql2);
+        $sql ="UPDATE contact SET contact_name='" . $name . "', contact_mail='" . $mail . "' WHERE contact_id='" . $id_contact . "'";
+        $dbh->exec($sql);
         header('Location: groups.php');    
     }
 ?>

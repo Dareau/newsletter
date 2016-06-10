@@ -7,6 +7,7 @@ if(!isset($_SESSION['user']))
 }
 ?>
 <?php
+    //Recupération des informations de la campagne focus
     if(!empty($_GET['id']))
     {
         $sql = "SELECT * 
@@ -30,6 +31,7 @@ if(!isset($_SESSION['user']))
     <script language="Javascript">
         function popFormCampaign(campaignId, listId, modelId)
         {
+            //Script du formulaire update Campagne
             var campaign_name = document.getElementById('td-campaign-name-'+ campaignId).innerHTML;
             var model_name = document.getElementById('td-model-name-'+ campaignId).innerHTML;
             var list_name = document.getElementById('td-list-name-'+ campaignId).innerHTML;
@@ -44,6 +46,7 @@ if(!isset($_SESSION['user']))
         }
         function confirmDelete(campaignId)
         {
+            //Script de la confirmation de suppression
             if (confirm("Vous êtes sur le point de supprimer une campagne. Continuer ?") == true) 
             {
                 document.location.href="manageCampaigns.php?type=delete&campaign_id=" + campaignId;
@@ -53,6 +56,7 @@ if(!isset($_SESSION['user']))
     <title>Mes campagnes</title>
 </head>
 <?php 
+    //GESTION DES MESSAGES D'ERREUR OU DE SUCCES
     if(!empty($_GET['error']))
     {    
         if($_GET['error'] == 'true')
@@ -65,7 +69,6 @@ if(!isset($_SESSION['user']))
         }
     }
 ?>
-        <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -74,8 +77,8 @@ if(!isset($_SESSION['user']))
                     </div>
                     <div clas="groups-container">
                         <h3 class="col-md-6">Mes campagnes</h3>
-                        <h3 class="col-md-6">Ma campagne :&nbsp<strong><?php if(!empty($_GET['id'])) echo $campaign_name; ?></strong> </h3>
-                        <!--Affichage de la liste des contact_list -->
+                        <h3 class="col-md-6">Ma campagne : &nbsp<strong><?php if(!empty($_GET['id'])) echo $campaign_name; ?></strong> </h3>
+                        <!--Affichage de la liste des campagnes -->
                         <div class="col-md-6 div-contact">
                             <table class="col-md-12 table table-hover table-design">
                                 <?php 
@@ -113,6 +116,7 @@ if(!isset($_SESSION['user']))
                                 ?>
                             </table>
                         </div>
+                        <!-- Affichange des détails de la campagne -->
                         <div class="col-md-6 div-contact">
                             <?php if(!empty($_GET['id'])) { ?>
                             <form method="post" action="manageCampaigns.php?type=send&id_model=<?php echo $model_id; ?>">
@@ -163,6 +167,7 @@ if(!isset($_SESSION['user']))
                         <h3 class="col-md-6">Créer une campagne</h3>
                         <h3 class="col-md-6">Modifier une campagne</h3>
                         <div class="col-md-6 div-list div-extend">
+                            <!-- Formulaire d'ajout de campagne -->
                             <form method="post" action="manageCampaigns.php?type=add">
                                 <?php 
                                     $sql_list = "SELECT list_name, list_id 
@@ -200,6 +205,7 @@ if(!isset($_SESSION['user']))
                             </form>
                         </div>
                         <div class="col-md-6 div-list div-extend">
+                            <!-- Formulaire d'update de campagne -->
                             <form method="post" action="manageCampaigns.php?type=update">
                                 <div class="form-group" id="formUpdateCampaign" style="visibility: hidden; margin-top: -30px">
                                     <input style="visibility: hidden" class="form-control" id="input_id_campaign" name = "id"></input>
@@ -209,6 +215,7 @@ if(!isset($_SESSION['user']))
                                     <select id="select_model" name="select_model" class="form-control">
                                         <option disabled selected>Selectionnez un model</option>
                                         <?php 
+                                        //Récupération de tous les modeles
                                             foreach ($dbh->query($sql_model) as $row)
                                             {
                                                 echo "<option id='select_model_name-" . $row['model_id']. "' value=".$row['model_id'].">".$row['model_name']."</option>";
@@ -219,6 +226,7 @@ if(!isset($_SESSION['user']))
                                     <select id="select_list" name="select_list" class="form-control">
                                         <option disabled selected>Selectionnez un groupe</option>
                                         <?php 
+                                        //Récupération de tous les groupes
                                             foreach ($dbh->query($sql_list) as $row)
                                             {
                                                 echo "<option id='select_list_name-" . $row['list_id'] . "' value=".$row['list_id'].">".$row['list_name']."</option>";
@@ -233,8 +241,6 @@ if(!isset($_SESSION['user']))
                 </div>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
     </div>
-    <!-- /#wrapper -->
 </body>
 </html>

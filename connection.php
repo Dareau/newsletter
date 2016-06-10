@@ -1,13 +1,14 @@
 <?php
 
 //CONNEXION BDD LOCALE
-// $hostname='localhost';
-// $username='root';
-// $password='';
-
 $hostname='localhost';
 $username='root';
-$password='root';
+$password='';
+
+//CONNEXION BDD RESEAU
+// $hostname='localhost';
+// $username='root';
+// $password='root';
 
 
 try {

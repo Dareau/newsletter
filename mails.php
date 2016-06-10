@@ -9,6 +9,7 @@ if(!isset($_SESSION['user']))
 <?php
 if(!empty($_GET['model_id']))
 {
+    //Recupération des informations du model focus
     $sql = "SELECT * FROM model WHERE model_id=" . $_GET['model_id'];
     foreach ($dbh->query($sql) as $row)
     {
@@ -23,7 +24,8 @@ if(!empty($_GET['model_id']))
     <script>
         function confirmDelete(modelId)
         {
-            if (confirm("Vous êtes sur le point de supprimer un modèle. Continuer ?") == true) 
+            //Script de la confirmation de suppression
+            if (confirm("Vous êtes sur le point de supprimer un modèle. Continuer ? \n (ATTENTION : Toutes campagnes utilisants ce model sera supprimées)") == true) 
             {
                 document.location.href="manageMails.php?type=delete&model_id=" + modelId;
             }
@@ -31,7 +33,8 @@ if(!empty($_GET['model_id']))
     </script>
     <title>Mes Mails</title>
 </head>
-<?php 
+<?php
+    //GESTION DES MESSAGES D'ERREUR OU DE SUCCES
     if(!empty($_GET['error']))
     {
         if($_GET['error'] == 'true')
@@ -44,7 +47,6 @@ if(!empty($_GET['model_id']))
         }
     }
 ?>
-        <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -87,10 +89,8 @@ if(!empty($_GET['model_id']))
                                 ?>
                             </table>
                         </div>
-                        <!--Affichage de la liste des contact de la contact_list -->
                         <div class="col-md-6 div-list div-mail">
-                            <!-- TODO : Prendre en compte l'utilisateur connecté pour id_user -->
-                            <!-- Formulaire d'ajout de contact_list -->                            
+                            <!-- Formulaire d'ajout de Model -->                            
                             <form method="post" action="manageMails.php?type=add">
                                 <div class="form-group">
                                     <label>Nom du modèle : </label>
@@ -108,7 +108,7 @@ if(!empty($_GET['model_id']))
                     </div>
                     <h3 class="col-md-12">Modifier un modèle</h3>
                     <div class="col-md-6 div-mail">
-                        <!-- Formulaire de modification de contact-list -->
+                        <!-- Formulaire de modification de Model -->
                         <?php
                             if(!empty($_GET['model_id']))
                             {
@@ -136,7 +136,6 @@ if(!empty($_GET['model_id']))
                 </div>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
     </div>
 </body>
 </html>

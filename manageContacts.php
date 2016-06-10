@@ -11,11 +11,12 @@ session_start();
         $mail=$_POST['mail'];   
         $sql = "INSERT INTO contact (contact_id, contact_mail, contact_name, id_user) 
                 VALUES ('" . $id_contact . "', '".utf8_decode($mail)."','".utf8_decode($nom)."', '" . $_SESSION['user'] . "')";
-        // use exec() because no results are returned
-        try{
+        try
+        {
             $dbh->exec($sql);
         }
-        catch(PDOException $ex){ 
+        catch(PDOException $ex)
+        { 
             header('Location: contacts.php?error=true'); 
         }
         if(empty($ex))
@@ -49,10 +50,12 @@ session_start();
         $sql2 ="UPDATE contact 
                 SET contact_name='" . $name . "', contact_mail='" . $mail . "' 
                 WHERE contact_id='" . $id_contact . "'";
-        try{
+        try
+        {
             $dbh->exec($sql2);
         }
-        catch(PDOException $ex){ 
+        catch(PDOException $ex)
+        { 
             header('Location: contacts.php?error=true'); 
         }
         if(empty($ex))
@@ -107,12 +110,7 @@ session_start();
                             {
                                 //Sinon, on le créer                                   
                                 $sql4 = "INSERT INTO appartient (id_contact, id_contact_list) 
-                                         VALUES 
-                                         (   
-                                             '" . $result['contact_id'] . "',
-                                             '" . $id . "'
-                                         )
-                                ";
+                                         VALUES ('" . $result['contact_id'] . "','" . $id . "')";
                                 $dbh->exec($sql4);                             
                             }
                                                 

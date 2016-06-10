@@ -6,11 +6,10 @@ if(!isset($_SESSION['user']))
     header("Location: index.php");
 }
 ?>
-    
+<!-- PAGE A PROPOS -->
 <head>
     <title>A propos</title>
 </head>         
-        <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -21,13 +20,6 @@ if(!isset($_SESSION['user']))
                 </div>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
     </div>
-    <!-- /#wrapper -->
-    
-    <!-- Scripts JS -->
-    <script src="../js/jquery.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    
 </body>
 </html>

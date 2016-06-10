@@ -12,19 +12,21 @@ if(!isset($_SESSION['user']))
     <script language="Javascript">
         function popFormContact(contactId)
         {
-                if(document.getElementById('formUpdateContact').style.visibility="hidden")
-                {
-                    var name = document.getElementById('td-contact-name-'+contactId).innerHTML;
-                    var mail = document.getElementById('td-contact-mail-'+contactId).innerHTML;
-                    console.log(name, mail, contactId);
-                    $('#input_update_contact1').val(name);
-                    $('#input_update_contact3').val(mail);
-                    $('#input_update_contact2').val(contactId);
-                    document.getElementById('formUpdateContact').style.visibility="visible";
-                }
+            //Script du formulaire update Contacts
+            if(document.getElementById('formUpdateContact').style.visibility="hidden")
+            {
+                var name = document.getElementById('td-contact-name-'+contactId).innerHTML;
+                var mail = document.getElementById('td-contact-mail-'+contactId).innerHTML;
+                console.log(name, mail, contactId);
+                $('#input_update_contact1').val(name);
+                $('#input_update_contact3').val(mail);
+                $('#input_update_contact2').val(contactId);
+                document.getElementById('formUpdateContact').style.visibility="visible";
+            }
         }
         function checkList()
         {
+            //Gestion des groupes pour l'import CSV
             var _class = $(".is-checked");
             console.log($("#checkAll").prop('checked'));
             $.each(_class,function(index,element){
@@ -41,6 +43,7 @@ if(!isset($_SESSION['user']))
         }
         function confirmDelete(contactId)
         {
+            //Script de la confirmation de suppression
             if (confirm("Vous êtes sur le point de supprimer un contact. Continuer ?") == true) 
             {
                 document.location.href="manageContacts.php?type=delete&contact_id=" + contactId;
@@ -49,7 +52,8 @@ if(!isset($_SESSION['user']))
     </script>
     <title>Mes Contacts</title>
 </head>
-<?php 
+<?php
+    //GESTION DES MESSAGES D'ERREUR OU DE SUCCES
     if(!empty($_GET['error']))
     {
         if($_GET['error'] == 'true')
@@ -62,7 +66,6 @@ if(!isset($_SESSION['user']))
         }
     }
 ?>
-        <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -106,7 +109,6 @@ if(!isset($_SESSION['user']))
                             </table>
                         </div>
                         <div class="col-md-6 div-list div-update">
-                            <!-- TODO : Prendre en compte l'utilisateur connecté pour id_user -->
                             <!-- Formulaire d'ajout de contact -->                            
                             <form method="post" action="manageContacts.php?type=add">
                                 <div class="form-group">
@@ -155,6 +157,5 @@ if(!isset($_SESSION['user']))
                 </div>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
 </body>
 </html>
