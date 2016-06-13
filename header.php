@@ -56,9 +56,6 @@ foreach ($dbh->query($sql) as $row)
                     <a href="campaigns.php"><i class="fa fa-flag fa-2"></i>&nbsp;Campagnes</a>
                 </li>
                 <li>
-                    <a href="about.php"><i class="fa fa-info-circle fa-2"></i>&nbsp;A propos</a>
-                </li>
-                <li>
                     <a href="contact.php"><i class="fa fa-phone fa-2"></i>&nbsp;Nous contacter</a>
                 </li>
                 <li>
