@@ -1,18 +1,24 @@
 <?php include("connection.php"); 
 session_start();
 ?>
-<?php
+<?php       
 //AJOUT D'UN MODEL A LA BDD
     if (isset($_POST['createModel']) && $_GET['type'] == 'add')
     {
         /* VALUES */
         $nom=$_POST['name'];
         $object=$_POST['object'];
-        $content=$_POST['content'];
-        $signature=$_POST['signature'];  
-        
+        $content=$_POST['rte1'];
+        $signature=$_POST['signature'];
+
+        // echo $nom;
+        // echo $object;
+        // echo addslashes($content);
+        // echo $signature;
+
+
         $sql = "INSERT INTO model (model_name, model_object, model_content, model_signature, user_id) 
-                VALUES ( '".utf8_decode($nom)."','".utf8_decode($object)."','".utf8_decode($content)."','".utf8_decode($signature)."', '" . $_SESSION['user'] . "')";
+                VALUES ( '".utf8_decode(addslashes($nom))."','".utf8_decode(addslashes($object))."','".utf8_decode(addslashes($content))."','".utf8_decode(addslashes($signature))."', '" . $_SESSION['user'] . "')";
         // use exec() because no results are returned        
         try{
             $dbh->exec($sql);
@@ -48,17 +54,11 @@ session_start();
         $model_signature=$_POST['signature'];
         
         $sql ="UPDATE model 
-                SET model_name='" . $model_name . "', 
-                model_object='" . $model_object . "', 
-                model_content='" . $model_content . "', 
-                model_signature='" . $model_signature . "'
+                SET model_name='" . addslashes($model_name) . "', 
+                model_object='" . addslashes($model_object) . "', 
+                model_content='" . addslashes($model_content) . "', 
+                model_signature='" . addslashes($model_signature) . "'
                 WHERE model_id='" . $model_id . "'";
-
-        echo $model_id;
-        echo $model_name;
-        echo $model_object;
-        echo $model_content;
-        echo $model_signature;
             
         try
         {

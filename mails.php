@@ -21,6 +21,14 @@ if(!empty($_GET['model_id']))
 }
     ?>
 <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="keywords" content="cross-browser rich text editor, rte, textarea, htmlarea, content management, cms, blog, internet explorer, firefox, safari, opera, netscape, konqueror" />
+	<meta name="description" content="The cross-browser rich-text editor (RTE) is based on the designMode() functionality introduced in Internet Explorer 5, and implemented in Mozilla 1.3+ using the Mozilla Rich Text Editing API." />
+	<meta name="author" content="Kevin Roth" />
+	<meta name="ROBOTS" content="ALL" />
+	<!-- html2xhtml.js written by Jacob Lee <letsgolee@lycos.co.kr> //-->
+	<script language="JavaScript" type="text/javascript" src="cbrte/html2xhtml.min.js"></script>
+	<script language="JavaScript" type="text/javascript" src="cbrte/richtext.min.js"></script>
     <script>
         function confirmDelete(modelId)
         {
@@ -89,25 +97,54 @@ if(!empty($_GET['model_id']))
                                 ?>
                             </table>
                         </div>
-                        <div class="col-md-6 div-list div-mail">
                             <!-- Formulaire d'ajout de Model -->                            
-                            <form method="post" action="manageMails.php?type=add">
-                                <div class="form-group">
-                                    <label>Nom du modèle : </label>
-                                    <input class="form-control" type="text" name="name" placeholder="Nom du modèle" required><br>
-                                    <label>Object du modèle : </label>
-                                    <input class="form-control" type="text" name="object" placeholder="Object du modèle" required><br>
-                                    <label>Contenu du modèle : </label>
-                                    <textarea ROWS='3' COLS='40' class="form-control" type="text" name="content" placeholder="Contenu du modèle" required></textarea><br>
-                                    <label>Signature du modèle : </label>
-                                    <input class="form-control" type="text" name="signature" placeholder="Signature du modèle" required><br>
-                                    <input class="btn btn-default btn-lg btn-block" type="submit" name="createModel" value="Créer">
-                                </div>
+                            <form name="RTEDemo" action="manageMails.php?type=add" method="post" onsubmit="return submitForm();">
+                                <input class="col-md-1" type="text" name="name" placeholder="Nom du modèle" required>
+                                <input type="text" name="object" placeholder="Object du modèle" required>
+                                <script language="JavaScript" type="text/javascript">
+                                    function submitForm() {
+                                        //make sure hidden and iframe values are in sync for all rtes before submitting form
+                                        updateRTEs();
+                                        
+                                        return true;
+                                    }
+                                    //Usage: initRTE(imagesPath, includesPath, cssFile, genXHTML, encHTML)
+                                    initRTE("cbrte/images/", "cbrte/", "", true);
+                                </script>
+                                <noscript><p><b>Javascript must be enabled to use this form.</b></p></noscript>
+
+                                <script language="JavaScript" type="text/javascript">
+                                //build new richTextEditor
+                                var rte1 = new richTextEditor('rte1');
+                                <?php
+                                //format content for preloading
+                                if (!(isset($_POST["rte1"]))) {
+                                    $content = "Build your newsletter here.";
+                                    $content = rteSafe($content);
+                                } else {
+                                    //retrieve posted value
+                                    $content = rteSafe($_POST["rte1"]);
+                                }
+                                ?>
+                                rte1.cmdJustifyLeft = false;
+                                rte1.cmdJustifyCenter = false;
+                                rte1.cmdJustifyRight = false;
+                                rte1.cmdJustifyFull = false;
+                                rte1.cmdHiliteColor = false;
+                                rte1.height = 250;
+                                rte1.width = 850;
+                                rte1.html = '<?=$content;?>';
+
+                                //rte1.toggleSrc = false;
+                                rte1.build();
+                                //-->
+                                </script>
+                                <input class="col-md-2" type="text" name="signature" placeholder="Signature du modèle" required>
+                                <p><input type="submit" name="createModel" value="Submit" /></p>
                             </form>
-                        </div>
                     </div>
                     <h3 class="col-md-12">Modifier un modèle</h3>
-                    <div class="col-md-6 div-mail">
+                    <div class="col-md-6">
                         <!-- Formulaire de modification de Model -->
                         <?php
                             if(!empty($_GET['model_id']))
@@ -137,5 +174,27 @@ if(!empty($_GET['model_id']))
             </div>
         </div>
     </div>
+    <?php
+        function rteSafe($strText) {
+            //returns safe code for preloading in the RTE
+            $tmpString = $strText;
+            
+            //convert all types of single quotes
+            $tmpString = str_replace(chr(145), chr(39), $tmpString);
+            $tmpString = str_replace(chr(146), chr(39), $tmpString);
+            $tmpString = str_replace("'", "&#39;", $tmpString);
+            
+            //convert all types of double quotes
+            $tmpString = str_replace(chr(147), chr(34), $tmpString);
+            $tmpString = str_replace(chr(148), chr(34), $tmpString);
+            //$tmpString = str_replace("\"", "\"", $tmpString);
+            
+            //replace carriage returns & line feeds
+            $tmpString = str_replace(chr(10), " ", $tmpString);
+            $tmpString = str_replace(chr(13), " ", $tmpString);
+            
+            return $tmpString;
+        }
+    ?>
 </body>
 </html>

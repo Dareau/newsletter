@@ -7,7 +7,7 @@ session_start();
     {
         /* VALUES */
         $nom=$_POST['name'];   
-        $sql = "INSERT INTO contact_list (list_name, id_user) VALUES ( '".utf8_decode($nom)."', '" . $_SESSION['user'] . "')";
+        $sql = "INSERT INTO contact_list (list_name, id_user) VALUES ( '".utf8_decode(addslashes($nom))."', '" . $_SESSION['user'] . "')";
         try{
             $dbh->exec($sql);
         }
@@ -61,7 +61,7 @@ session_start();
         $id_list=$_POST['input_id_list'];
         $name=$_POST['name'];
   
-        $sql ="UPDATE contact_list SET list_name='" . $name . "' WHERE list_id='" .$id_list . "'";
+        $sql ="UPDATE contact_list SET list_name='" . addslashes($name) . "' WHERE list_id='" .$id_list . "'";
         try{
             $dbh->exec($sql);
         }

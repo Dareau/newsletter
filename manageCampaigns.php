@@ -12,7 +12,7 @@ session_start();
 
         $sql = "INSERT INTO campaign
                 (campaign_name,id_model,id_contact_list,id_user)
-                VALUES ('".utf8_decode($nom)."', '" . utf8_decode($id_model) . "', '" . utf8_decode($id_list) . "', '" . $_SESSION['user'] . "')";
+                VALUES ('".utf8_decode(addslashes($nom))."', '" . utf8_decode($id_model) . "', '" . utf8_decode($id_list) . "', '" . $_SESSION['user'] . "')";
         
         try{
             $dbh->exec($sql);
@@ -50,7 +50,7 @@ session_start();
         $list_id=$_POST['select_list'];
         
         $sql ="UPDATE campaign 
-                SET campaign_name='" . $campaign_name . "', 
+                SET campaign_name='" . addslashes($campaign_name) . "', 
                 id_model='" . $model_id . "', 
                 id_contact_list='" . $list_id . "' 
                 WHERE campaign_id='" . $campaign_id . "'";
