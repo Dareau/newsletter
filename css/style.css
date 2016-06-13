@@ -25,6 +25,13 @@ font-size:12px;
 
 /*######################## Tuiles ##################################*/
 
+#custom-rte-div{
+    height: 500px;
+    width: 40%;
+    float: left;
+    margin-top: -50px;
+}
+
 #error{
     z-index: 99;
     background-color: red;

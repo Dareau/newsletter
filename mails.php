@@ -63,7 +63,7 @@ if(!empty($_GET['model_id']))
                     </div>
                     <div class="groups-container">
                         <h3 class="col-md-6">Mes modèles</h3>
-                        <h3 class="col-md-6">Ajouter un modèle</h3>
+                        <h3 class="col-md-6" style="visibility : hidden">a</h3>
                         <!--Affichage de la liste des model -->
                         <div class="col-md-6 div-mail">
                             <table class="col-md-12 table table-hover table-design">
@@ -97,10 +97,12 @@ if(!empty($_GET['model_id']))
                                 ?>
                             </table>
                         </div>
-                            <!-- Formulaire d'ajout de Model -->                            
+                        <div id="custom-rte-div">
+                            <!-- Formulaire d'ajout de Model -->
+                            <h3>Ajouter un modèle</h3>                         
                             <form name="RTEDemo" action="manageMails.php?type=add" method="post" onsubmit="return submitForm();">
-                                <input class="col-md-1" type="text" name="name" placeholder="Nom du modèle" required>
-                                <input type="text" name="object" placeholder="Object du modèle" required>
+                                <input class="col-md-2" type="text" name="name" placeholder="Nom" required>
+                                <input type="text" name="object" placeholder="Object" required>
                                 <script language="JavaScript" type="text/javascript">
                                     function submitForm() {
                                         //make sure hidden and iframe values are in sync for all rtes before submitting form
@@ -137,11 +139,11 @@ if(!empty($_GET['model_id']))
 
                                 //rte1.toggleSrc = false;
                                 rte1.build();
-                                //-->
                                 </script>
-                                <input class="col-md-2" type="text" name="signature" placeholder="Signature du modèle" required>
+                                <input class="col-md-2" type="text" name="signature" placeholder="Signature" required>
                                 <p><input type="submit" name="createModel" value="Submit" /></p>
                             </form>
+                            </div>
                     </div>
                     <h3 class="col-md-12">Modifier un modèle</h3>
                     <div class="col-md-6">
