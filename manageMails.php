@@ -11,12 +11,6 @@ session_start();
         $content=$_POST['rte1'];
         $signature=$_POST['signature'];
 
-        // echo $nom;
-        // echo $object;
-        // echo addslashes($content);
-        // echo $signature;
-
-
         $sql = "INSERT INTO model (model_name, model_object, model_content, model_signature, user_id) 
                 VALUES ( '".utf8_decode(addslashes($nom))."','".utf8_decode(addslashes($object))."','".utf8_decode(addslashes($content))."','".utf8_decode(addslashes($signature))."', '" . $_SESSION['user'] . "')";
         // use exec() because no results are returned        
@@ -50,9 +44,9 @@ session_start();
         $model_id=$_GET['model_id'];
         $model_name=$_POST['name'];
         $model_object=$_POST['object'];
-        $model_content=$_POST['content'];
+        $model_content=$_POST['rte2'];
         $model_signature=$_POST['signature'];
-        
+
         $sql ="UPDATE model 
                 SET model_name='" . addslashes($model_name) . "', 
                 model_object='" . addslashes($model_object) . "', 

@@ -67,35 +67,56 @@ session_start();
     }  
     
 //MULTI-ENVOIE D'UN MODELE A UNE LISTE
+
+    /*
+        Récupération des information de l'utilisateur grâce à la variable de session.
+        Ces informations vont permettre de renseigner l'expediteur lors de l'envoi des mails
+    */
     $sql = "SELECT * FROM user
             WHERE id='" . $_SESSION['user'] . "'";
     foreach ($dbh->query($sql) as $row)
     {
+        //Assignation des valeurs à des variables / Même valeur pour tous les mails à envoyer
         $user_login = $row['login'];
         $user_mail = $row['mail'];
     }
-    
+    /*
+        Condition d'execution du script, lors de l'envoi de la campagne, l'URL du formulaire a plusieurs paramètres :
+            - ?type=send : l'action que l'on veut réaliser
+            - id_model : l'id du modèle de la campagne
+            - id_campaign : l'id de la campagne
+    */
     if ($_GET['type'] == 'send')
     {
-        /*VALUES*/
+        /* Récupération des deux id dans l'URL somumise par le formulaire */
         $id_campaign=$_GET['id_campaign'];
         $id_model=$_GET['id_model'];
+
+        /* Récupération de l'id de la liste de contact de la campagne */
         $list_id=$_POST['list_id'];
         
-        //RECUPERATION DES INFOS DU MODEL
+        /*
+            Récupération des informations du modèle en base de données.
+            Ces informations vont nous permettre de construire notre mail.
+        */
         $sql_model_details = "SELECT *
                               FROM model
                               WHERE model_id=". $id_model;
                               
         foreach ($dbh->query($sql_model_details) as $model)
         {
+            //Assignation des valeurs à des variables / Même valeur pour tous les mails à envoyer
             $model_name=$model['model_name'];
             $model_object=$model['model_object'];
             $model_content=$model['model_content'];
             $model_signature=$model['model_signature'];
         }
-        
-        //RECUPERATION DE TOUS LES MAILS DE LA LISTE
+        /* Chaque campagne ne s'envoi qu'une fois, ici, nous mettons à jour notre campagne pour la signaler comme "envoyée". */
+        $sql_envoye = "UPDATE campaign
+                        SET envoye='1'
+                        WHERE campaign_id='" . $id_campaign . "'";
+        $dbh->exec($sql_envoye);
+        /* Récupération de tous les contactes de la liste de la campagne. */
         $sql_list_mail = "SELECT contact_name, contact_mail, contact.contact_id 
                           FROM contact , appartient, contact_list 
                           WHERE appartient.id_contact_list = contact_list.list_id 
@@ -106,36 +127,41 @@ session_start();
         
         foreach ($dbh->query($sql_list_mail) as $mail) 
         {
-            //CREATION DE LA LIGNE DE TRACKING
+            /*
+                Chaque résultat de la requête représente un mail à envoyer.
+                La table tracking répertorie chaque mail envoyé d'une campagne et suit l'ouverture de celui ci.
+                Nous créons donc ici les lignes de suivi de chaque mail envoyés.
+            */
             $sql = "INSERT INTO tracking (id_contact, id_campaign, ouvert)
                     VALUES ('" . $mail['contact_id'] . "','" . $id_campaign . "','0')";
             $dbh->exec($sql);
 
-            //ON UPDATE LE CHAMP ENVOYE DE LA CAMPAGNE
-            $sql_envoye = "UPDATE campaign
-                           SET envoye='1'
-                           WHERE campaign_id='" . $id_campaign . "'";
-            $dbh->exec($sql_envoye);
-
-            /* Destinataire (votre adresse e-mail) */
-            $to = $mail['contact_mail'];
-            $expediteur = $user_mail;
-            $expediteur_login = $user_login;
-            $sujet = $model_object;
+            /*
+                Nous utilisons l'ensemble des variables créés précédemment afin de fabriquer le mail qui va être envoyée.
+            */
+            $to = $mail['contact_mail']; //mail de notre contacte
+            $expediteur = $user_mail; //mail de l'utilisateur, créateur de la newsletter
+            $expediteur_login = $user_login; //login de l'utilisateur
+            $sujet = $model_object; //objet du modèle séléctionné
             
             /* Construction du message */
-            $msg .= $model_content."<br/>";
-            $msg .= $model_signature;
+            $msg .= $model_content."<br/>"; //contenu du modèle
+            $msg .= $model_signature; //signature du modèle
+            /*
+                Notre système de tracking repose sur un spypixel dissimulé dans le mail. 
+                Une fois le mail ouvert, cette image se charge et une fonction php à l'URL : http://www.appliweb.lan/newsletter/tracking.php s'execute.
+                Cette fonction reçoit en paramètre l'id du contacte ainsi que l'id de la campagne.
+            */
             $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php?id_campaign=' . $id_campaign . '&id_contact=' . $mail['contact_id'] . '" alt="" width="1" height="1" border="0"/>';
             
             /* En-têtes de l'e-mail */
             $headers = 'From: "' . $expediteur_login . '" <"'.$expediteur.'">'."\n";
-            $headers .= 'Content-Type: text/html; charset=\"iso-8859-1\"' . "\n";
+            $headers .= 'Content-Type: text/html; charset=\"iso-8859-1\"' . "\n"; //Permet de renseigner que le message doit être interpreté en HTML
             
             /* Envoi de l'e-mail */
             mail($to, $sujet, $msg, $headers);
-            header('Location: campaigns.php'); 
-            
+            /* Retour à la page de campagne */
+            header('Location: campaigns.php');  
         }
     }
 ?>

@@ -143,16 +143,60 @@ if(!empty($_GET['model_id']))
                                 <input class="col-md-2" type="text" name="signature" placeholder="Signature" required>
                                 <p><input type="submit" name="createModel" value="Submit" /></p>
                             </form>
-                            </div>
+                        </div>
                     </div>
-                    <h3 class="col-md-12">Modifier un modèle</h3>
-                    <div class="col-md-6">
                         <!-- Formulaire de modification de Model -->
                         <?php
                             if(!empty($_GET['model_id']))
                             {
                         ?>
-                        <div name="formUpdateModel" id="formUpdateModel"> 
+                        <div id="custom-rte-div-update">
+                            <!-- Formulaire d'ajout de Model -->                      
+                            <form name="RTEDemo2" action="manageMails.php?type=update&model_id=<?php echo $_GET['model_id']; ?>" method="post" onsubmit="return submitForm();">
+                                <input style="visibility: hidden" class="form-control" id="id" name = "id"></input>
+                                <input type="text" name="name" placeholder="Nom du modèle" value="<?php echo $model_name; ?>" required>
+                                <input type="text" name="object" placeholder="Object du modèle" value="<?php echo $model_object; ?>" required><br>
+                                <script language="JavaScript" type="text/javascript">
+                                    function submitForm() {
+                                        //make sure hidden and iframe values are in sync for all rtes before submitting form
+                                        updateRTEs();
+                                        
+                                        return true;
+                                    }
+                                    //Usage: initRTE(imagesPath, includesPath, cssFile, genXHTML, encHTML)
+                                    initRTE("cbrte/images/", "cbrte/", "", true);
+                                </script>
+                                <noscript><p><b>Javascript must be enabled to use this form.</b></p></noscript>
+
+                                <script language="JavaScript" type="text/javascript">
+                                //build new richTextEditor
+                                var rte2 = new richTextEditor('rte2');
+                                <?php
+                                //format content for preloading
+                                if (!(isset($_POST["rte2"]))) {
+                                    $content = $model_content;
+                                    $content = rteSafe($content);
+                                } else {
+                                    //retrieve posted value
+                                    $content = rteSafe($_POST["rte2"]);
+                                }
+                                ?>
+                                rte2.cmdJustifyLeft = false;
+                                rte2.cmdJustifyCenter = false;
+                                rte2.cmdJustifyRight = false;
+                                rte2.cmdJustifyFull = false;
+                                rte2.cmdHiliteColor = false;
+                                rte2.height = 250;
+                                rte2.width = 850;
+                                rte2.html = '<?=$content;?>';
+
+                                //rte2.toggleSrc = false;
+                                rte2.build();
+                                </script>
+                                <input type="text" name="signature" placeholder="Signature du modèle" value="<?php echo $model_signature; ?>" required><br>
+                                <p><input type="submit" name="createModel" value="Submit" /></p>
+                            </form>
+                        <!--<div name="formUpdateModel" id="formUpdateModel"> 
                             <form method="post" action="manageMails.php?type=update&model_id=<?php echo $_GET['model_id']; ?>">
                                 <div class="form-group" style="margin-top: -30px">
                                     <input style="visibility: hidden" class="form-control" id="id" name = "id"></input>
@@ -167,7 +211,7 @@ if(!empty($_GET['model_id']))
                                     <input class="btn btn-default btn-lg btn-block" type="submit" name="UpdateModel" value="Modifier">
                                 </div>
                             </form>
-                        </div>
+                        </div>-->
                         <?php
                             }
                         ?>
