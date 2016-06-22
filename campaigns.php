@@ -7,7 +7,7 @@ if(!isset($_SESSION['user']))
 }
 ?>
 <?php
-    //Recupération des informations de la campagne focus
+    //Recupération des informations de la campagne focus via l'id de l'URL
     if(!empty($_GET['id']))
     {
         $sql = "SELECT * 
@@ -32,7 +32,7 @@ if(!isset($_SESSION['user']))
     <script language="Javascript">
         function popFormCampaign(campaignId, listId, modelId)
         {
-            //Script du formulaire update Campagne
+            //Script du formulaire update Campagne (apparition + remplissage)
             var campaign_name = document.getElementById('td-campaign-name-'+ campaignId).innerHTML;
             var model_name = document.getElementById('td-model-name-'+ campaignId).innerHTML;
             var list_name = document.getElementById('td-list-name-'+ campaignId).innerHTML;

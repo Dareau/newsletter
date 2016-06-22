@@ -10,8 +10,7 @@ if(!isset($_SESSION['user']))
 <head>
     <title>Nous contacter</title>
 </head>
-
-        <!-- Page Content -->
+        <!-- Formulaire de contact -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">

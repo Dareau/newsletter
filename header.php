@@ -2,6 +2,7 @@
 
 session_start();
 
+//Récupération des informations de l'utilisateur connecté
 $sql="SELECT * FROM user WHERE id=".$_SESSION['user'];
 foreach ($dbh->query($sql) as $row)
 {
@@ -37,7 +38,7 @@ foreach ($dbh->query($sql) as $row)
 
 <body>
     <div id="wrapper">
-        <!-- Sidebar -->
+        <!-- Barre latérale -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">

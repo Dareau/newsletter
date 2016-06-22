@@ -17,6 +17,7 @@ session_start();
         try{
             $dbh->exec($sql);
         }
+        //Gestion des erreurs
         catch(PDOException $ex){ 
             header('Location: campaigns.php?error=true'); 
         }
@@ -44,6 +45,7 @@ session_start();
 //EDIT D'UNE CAMPAGNE    
     if($_GET['type'] == 'update')
     {
+        /* VALUES */
         $campaign_id=$_POST['id'];
         $campaign_name=$_POST['name'];
         $model_id=$_POST['select_model'];
@@ -57,6 +59,7 @@ session_start();
         try{
             $dbh->exec($sql);
         }
+        //Gestion des erreurs
         catch(PDOException $ex){ 
             header('Location: campaigns.php?error=true'); 
         }

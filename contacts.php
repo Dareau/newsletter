@@ -12,7 +12,7 @@ if(!isset($_SESSION['user']))
     <script language="Javascript">
         function popFormContact(contactId)
         {
-            //Script du formulaire update Contacts
+            //Script du formulaire update Contacts (apparition + remplissage)
             if(document.getElementById('formUpdateContact').style.visibility="hidden")
             {
                 var name = document.getElementById('td-contact-name-'+contactId).innerHTML;

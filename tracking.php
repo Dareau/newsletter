@@ -3,6 +3,7 @@ session_start();
 ?>
 <?php
 // UPDATE LIGNE OUVERT
+//Executé à l'ouverture du spypixel des mails
 if(isset($_GET['id_campaign']) && isset($_GET['id_contact']))
 {
     $sql = "UPDATE tracking

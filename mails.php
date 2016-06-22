@@ -21,12 +21,12 @@ if(!empty($_GET['model_id']))
 }
     ?>
 <head>
+    <!-- Import nécessaire au fonctionnement de RTE -->
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<meta name="keywords" content="cross-browser rich text editor, rte, textarea, htmlarea, content management, cms, blog, internet explorer, firefox, safari, opera, netscape, konqueror" />
 	<meta name="description" content="The cross-browser rich-text editor (RTE) is based on the designMode() functionality introduced in Internet Explorer 5, and implemented in Mozilla 1.3+ using the Mozilla Rich Text Editing API." />
 	<meta name="author" content="Kevin Roth" />
 	<meta name="ROBOTS" content="ALL" />
-	<!-- html2xhtml.js written by Jacob Lee <letsgolee@lycos.co.kr> //-->
 	<script language="JavaScript" type="text/javascript" src="cbrte/html2xhtml.min.js"></script>
 	<script language="JavaScript" type="text/javascript" src="cbrte/richtext.min.js"></script>
     <script>
@@ -110,13 +110,11 @@ if(!empty($_GET['model_id']))
                                         
                                         return true;
                                     }
-                                    //Usage: initRTE(imagesPath, includesPath, cssFile, genXHTML, encHTML)
                                     initRTE("cbrte/images/", "cbrte/", "", true);
                                 </script>
                                 <noscript><p><b>Javascript must be enabled to use this form.</b></p></noscript>
 
                                 <script language="JavaScript" type="text/javascript">
-                                //build new richTextEditor
                                 var rte1 = new richTextEditor('rte1');
                                 <?php
                                 //format content for preloading
@@ -134,10 +132,9 @@ if(!empty($_GET['model_id']))
                                 rte1.cmdJustifyFull = false;
                                 rte1.cmdHiliteColor = false;
                                 rte1.height = 250;
-                                rte1.width = 850;
+                                rte1.width = 800;
                                 rte1.html = '<?=$content;?>';
 
-                                //rte1.toggleSrc = false;
                                 rte1.build();
                                 </script>
                                 <input class="col-md-2" type="text" name="signature" placeholder="Signature" required>
@@ -163,13 +160,11 @@ if(!empty($_GET['model_id']))
                                         
                                         return true;
                                     }
-                                    //Usage: initRTE(imagesPath, includesPath, cssFile, genXHTML, encHTML)
                                     initRTE("cbrte/images/", "cbrte/", "", true);
                                 </script>
                                 <noscript><p><b>Javascript must be enabled to use this form.</b></p></noscript>
 
                                 <script language="JavaScript" type="text/javascript">
-                                //build new richTextEditor
                                 var rte2 = new richTextEditor('rte2');
                                 <?php
                                 //format content for preloading
@@ -187,31 +182,14 @@ if(!empty($_GET['model_id']))
                                 rte2.cmdJustifyFull = false;
                                 rte2.cmdHiliteColor = false;
                                 rte2.height = 250;
-                                rte2.width = 850;
+                                rte2.width = 800;
                                 rte2.html = '<?=$content;?>';
 
-                                //rte2.toggleSrc = false;
                                 rte2.build();
                                 </script>
                                 <input type="text" name="signature" placeholder="Signature du modèle" value="<?php echo $model_signature; ?>" required><br>
                                 <p><input type="submit" name="createModel" value="Submit" /></p>
                             </form>
-                        <!--<div name="formUpdateModel" id="formUpdateModel"> 
-                            <form method="post" action="manageMails.php?type=update&model_id=<?php echo $_GET['model_id']; ?>">
-                                <div class="form-group" style="margin-top: -30px">
-                                    <input style="visibility: hidden" class="form-control" id="id" name = "id"></input>
-                                    <label>Nom du modèle : </label>
-                                    <input class="form-control" type="text" name="name" placeholder="Nom du modèle" value="<?php echo $model_name; ?>" required><br>
-                                    <label>Object du modèle : </label>
-                                    <input class="form-control" type="text" name="object" placeholder="Object du modèle" value="<?php echo $model_object; ?>" required><br>
-                                    <label>Contenu du modèle : </label>
-                                    <textarea ROWS='3' COLS='40' class="form-control" type="text" name="content" placeholder="Contenu du modèle" required><?php echo $model_content; ?></textarea><br>
-                                    <label>Signature du modèle : </label>
-                                    <input class="form-control" type="text" name="signature" placeholder="Signature du modèle" value="<?php echo $model_signature; ?>" required><br>
-                                    <input class="btn btn-default btn-lg btn-block" type="submit" name="UpdateModel" value="Modifier">
-                                </div>
-                            </form>
-                        </div>-->
                         <?php
                             }
                         ?>

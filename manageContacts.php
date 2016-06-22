@@ -15,6 +15,7 @@ session_start();
         {
             $dbh->exec($sql);
         }
+        //Gestion des erreurs
         catch(PDOException $ex)
         { 
             header('Location: contacts.php?error=true'); 
@@ -54,6 +55,7 @@ session_start();
         {
             $dbh->exec($sql2);
         }
+        //Gestion des erreurs
         catch(PDOException $ex)
         { 
             header('Location: contacts.php?error=true'); 
@@ -68,13 +70,12 @@ session_start();
     {
         if ($_FILES['csv']['size'] > 0) 
         { 
-            //get the csv file
+            //Récupération du fichier CSV
             $file = $_FILES['csv']['tmp_name']; 
             $handle = fopen($file,"r");
             $i=0;
             
-            //loop through the csv file and insert into database
-
+            //Boucle parcourant le fichier CSV
             while ($data = fgetcsv($handle,1000,",","'")) 
             {
                 //GET DATA FROM CSV 

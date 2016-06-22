@@ -13,10 +13,10 @@ session_start();
 
         $sql = "INSERT INTO model (model_name, model_object, model_content, model_signature, user_id) 
                 VALUES ( '".utf8_decode(addslashes($nom))."','".utf8_decode(addslashes($object))."','".utf8_decode(addslashes($content))."','".utf8_decode(addslashes($signature))."', '" . $_SESSION['user'] . "')";
-        // use exec() because no results are returned        
         try{
             $dbh->exec($sql);
         }
+        //Gestion des erreurs
         catch(PDOException $ex){ 
             header('Location: mails.php?error=true'); 
         }
@@ -58,6 +58,7 @@ session_start();
         {
             $dbh->exec($sql);
         }
+        //Gestion des erreurs
         catch(PDOException $ex)
         { 
             header('Location: mails.php?error=true'); 

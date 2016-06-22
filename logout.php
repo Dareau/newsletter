@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+//Déconnexion de l'utilisateur
 if(!isset($_SESSION['user']))
 {
     header("Location: index.php");

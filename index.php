@@ -9,7 +9,7 @@ if(isset($_POST['btn-login']))
     $upass = $_POST['pass'];
 
     
-    
+    //Test de connection
     $sql = "SELECT * FROM user WHERE login='" . $login . "'";
     foreach ($dbh->query($sql) as $row)
     {   

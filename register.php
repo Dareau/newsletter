@@ -2,21 +2,17 @@
 
 session_start();
 
-// if(isset($_SESSION['user'])!="")
-// {
-//     header("Location: index.php");
-// }
-
 if(isset($_POST['btn-signup']))
 {
     $login = $_POST['login'];
     $mail = $_POST['mail'];
+    //Codage md5 pour le mot de passe
     $password = md5($_POST['password']);
     
     $sql="INSERT INTO user(login,mail,password) VALUES('$login','$mail','$password')";
     
     try{
-        // INSERT new account
+        //Création d'un nouveau compte
             $dbh->exec($sql);
         }
         catch(PDOException $ex){ echo '<div class="alert alert-danger" role="alert">Erreur : Utilisateur déjà existant</div>'; }
@@ -50,6 +46,7 @@ if(isset($_POST['btn-signup']))
     </head>
     <body>
         <center>
+        <!-- Formulaire d'inscription -->
             <div id="login-form">
                 <form method="post">
                     <table align="center" width="30%" border="0">

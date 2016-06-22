@@ -1,17 +1,18 @@
 <?php
 
-//CONNEXION BDD LOCALE
+//CONNEXION BDD LOCALE (EASY PHP)
 // $hostname='localhost';
 // $username='root';
 // $password='';
 
-//CONNEXION BDD RESEAU
+//CONNEXION BDD RESEAU PERSONNEL
 $hostname='localhost';
 $username='root';
 $password='root';
 
 
-try {
+try 
+{
     $dbh = new PDO("mysql:host=$hostname;dbname=newsletterdb",$username,$password);
     $dbh->exec("SET CHARACTER SET utf8");
 

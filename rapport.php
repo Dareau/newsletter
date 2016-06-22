@@ -1,9 +1,5 @@
 <?php include("header.php"); 
 //session_start();
-
-$total = 0;
-$ouvert = 0;
-
 if(!isset($_SESSION['user']))
 {
     header("Location: index.php");
@@ -12,6 +8,7 @@ if(!isset($_SESSION['user']))
 <head>
     <title>Rapport</title>
 </head>
+        <!-- Tableau de suivi des mails envoyés par la campagne -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">

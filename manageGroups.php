@@ -11,6 +11,7 @@ session_start();
         try{
             $dbh->exec($sql);
         }
+        //Gestion des erreurs
         catch(PDOException $ex){ 
             header('Location: groups.php?error=true'); 
         }
@@ -65,6 +66,7 @@ session_start();
         try{
             $dbh->exec($sql);
         }
+        //Gestion des erreurs
         catch(PDOException $ex){ 
             header('Location: groups.php?error=true'); 
         }
