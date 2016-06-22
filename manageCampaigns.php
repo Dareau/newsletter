@@ -148,6 +148,7 @@ session_start();
             $sujet = $model_object; //objet du modèle séléctionné
             
             /* Construction du message */
+            $msg = "";
             $msg .= $model_content."<br/>"; //contenu du modèle
             $msg .= $model_signature; //signature du modèle
             /*
@@ -158,6 +159,7 @@ session_start();
             $msg .= '<img src="http://www.appliweb.lan/newsletter/tracking.php?id_campaign=' . $id_campaign . '&id_contact=' . $mail['contact_id'] . '" alt="" width="1" height="1" border="0"/>';
             
             /* En-têtes de l'e-mail */
+            $headers = "";
             $headers = 'From: "' . $expediteur_login . '" <"'.$expediteur.'">'."\n";
             $headers .= 'Content-Type: text/html; charset=\"iso-8859-1\"' . "\n"; //Permet de renseigner que le message doit être interpreté en HTML
             
