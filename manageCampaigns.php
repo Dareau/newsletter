@@ -160,7 +160,7 @@ session_start();
             
             /* En-têtes de l'e-mail */
             $headers = "";
-            $headers = 'From: "' . $expediteur_login . '" <"'.$expediteur.'">'."\n";
+            $headers = 'From: "' . $expediteur_login . '" <"'.$expediteur_login.'">'."\n";
             $headers .= 'Content-Type: text/html; charset=\"iso-8859-1\"' . "\n"; //Permet de renseigner que le message doit être interpreté en HTML
             
             /* Envoi de l'e-mail */
